@@ -75,7 +75,9 @@ public class Menus {
 				logBattle.setText(l+"Ataque\n");
 				log=logBattle.getText();
 				
-				logBattle.getElement().getFirstChildElement().setScrollTop(logBattle.getElement().getFirstChildElement().getScrollHeight());
+				//logBattle.getElement().getFirstChildElement().setScrollTop(logBattle.getElement().getFirstChildElement().getScrollHeight());
+				
+				logBattle.getElement().setScrollTop(logBattle.getElement().getScrollHeight());
 				
 				//logBattle.setCursorPos(log.length()-1);
 				//logBattle.setReadOnly(true);
