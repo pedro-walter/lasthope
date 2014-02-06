@@ -2,18 +2,15 @@ package com.gft.lasthope.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gft.lasthope.client.LoginInfo;
 import com.gft.lasthope.client.LoginService;
@@ -25,18 +22,15 @@ public class Last_Hope implements EntryPoint {
 	private Label loginLabel = new Label("Efetue Login");
 	private Anchor signInLink = new Anchor("Login");
 	private Anchor signOutLink = new Anchor("Logout");
-	AbsolutePanel rootPanel = new AbsolutePanel();
-	AbsolutePanel northPanel = new AbsolutePanel();
-	AbsolutePanel botPanel = new AbsolutePanel();
-	AbsolutePanel midPanel = new AbsolutePanel();
-	AbsolutePanel teste = new AbsolutePanel();
-	AbsolutePanel westPanel = new AbsolutePanel();
-	HorizontalPanel footer = new HorizontalPanel();
+	static AbsolutePanel northPanel = new AbsolutePanel();
+	static AbsolutePanel botPanel = new AbsolutePanel();
+	static AbsolutePanel midPanel = new AbsolutePanel();
+	static AbsolutePanel westPanel = new AbsolutePanel();
+	static HorizontalPanel footer = new HorizontalPanel();
 	VerticalPanel vWest = new VerticalPanel();
-	Image background = new Image();
-	Label lblT = new Label();
-	Button btnT = new Button();
-
+	AbsolutePanel rootPanel = new AbsolutePanel();
+	Button logout = new Button();
+	
 	public void onModuleLoad() {
 		// Check login status using login service.
 		LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -44,88 +38,84 @@ public class Last_Hope implements EntryPoint {
 				new AsyncCallback<LoginInfo>() {
 					public void onFailure(Throwable error) {
 					}
-					
+
 					public void onSuccess(LoginInfo result) {
 						loginInfo = result;
-						//somente para desenvolvimento
-						loginInfo.setLogoutUrl(loginInfo.getLogoutUrl() + "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
+						// somente para desenvolvimento
+						loginInfo.setLogoutUrl(loginInfo.getLogoutUrl()
+								+ "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
+						// System.out.println(loginInfo.getLoginUrl()+
+						// "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
 						if (loginInfo.isLoggedIn()) {
-							System.out.println("Load Setup");
+							//debug
+							//System.out.println("Load Setup");
 							loadSetup();
 						} else {
-							System.out.println("Load login");
+							//debug
+							//System.out.println("Load login");
 							loadLogin();
 						}
 					}
 				});
 	}
 
-	
-	private void loadSetup(){
-		System.out.println("Load 1");
+	private void loadSetup() {
+		//debug
+		//System.out.println("Load 1");
+		Menus west = new Menus();
 		
-		lblT.setSize("10px", "20px");
-		lblT.setText("Teste senha");
-		lblT.setVisible(true);
-
-		// usuario.setSize("100px","25px");
-
-		btnT.setSize("50px", "30px");
-		btnT.setText("OK");
-		btnT.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				
-			}
-
-		});
-
-		teste.getElement().getStyle().setProperty("border", "3px solid #000000");
-		teste.add(lblT, 10, 20);
-		teste.add(btnT, 500, 480);
-		teste.setSize("600px", "530px");
+		//estilos
+		northPanel.setStyleName("header");
+		midPanel.setStyleName("dockPanel");
+		westPanel.setStyleName("dockPanel");
+		botPanel.setStyleName("dockPanel");
 		
-		System.out.println("Load 2");
+		//tamanhos
+		northPanel.setSize("1000px","200px");
+		midPanel.setSize("893px","586px");
+		footer.setSize("1000px", "100px");
+		westPanel.setSize("100px", "586px");
 
-		background.setUrl(GWT.getModuleBaseURL() + "Images/background.jpg");
-
-		//tab = criaTab();
+		//debug
+		//System.out.println("Load 2");
 
 		signOutLink.setHref(loginInfo.getLogoutUrl());
 		
-		footer.setSize("900px", "100px");
+		vWest=west.criaMenuWest();
+		
+		//add nos paineis
+		northPanel.add(new HTML("LastHope"));
 		footer.add(signOutLink);
-
 		botPanel.add(footer);
-		// botPanel.getElement().getStyle().setProperty("border",
-		// "3px solid #000000");
-
-		//vWest = CriaVWest.criaVWest();
 		westPanel.add(vWest);
-		westPanel.setSize("100px", "530px");
-		westPanel.getElement().getStyle()
-				.setProperty("border", "3px solid #000000");
-
-		northPanel.add(new Image("http://www.jmstatsolutions.com/wp-content/themes/JandM_Statistical_Solutions/images/GFT.jpg"));
-
-		midPanel.add(teste);
 		
-		System.out.println("Load 3");
+		//debug
+		//System.out.println("Load 3");
 		
+		//add os paineis no root
 		rootPanel.add(northPanel, 0, 0);
 		rootPanel.add(botPanel, 0, 800);
-		rootPanel.add(midPanel, 105, 265);
-		rootPanel.add(westPanel, 0, 265);
+		rootPanel.add(midPanel, 107, 207);
+		rootPanel.add(westPanel, 0, 207);
 		// rootPanel.setStyleName("dockpanel");
 
 		RootLayoutPanel.get().add(rootPanel);
 
-		System.out.println("Load ok");
-		
-		//RootPanel.get().add(signOutLink);
+		//debug
+		//System.out.println("Load ok");
+
+		// RootPanel.get().add(signOutLink);
 	}
+
 	private void loadLogin() {
 		// Assemble login panel.
-		signInLink.setHref(loginInfo.getLoginUrl());
+		//debug
+		//System.out.println("loadLogin");
+		// loginInfo.setLogoutUrl(loginInfo.getLogoutUrl() +
+		// "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
+		// apenas para desenvolvimento
+		signInLink.setHref(loginInfo.getLoginUrl()
+				+ "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
 		loginPanel.add(loginLabel);
 		loginPanel.add(signInLink);
 		RootLayoutPanel.get().add(loginPanel);
