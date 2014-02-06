@@ -1,0 +1,2 @@
+serviceClass: com.gft.lasthope.client.LoginService
+path: D2DDEA9BB62793D29BA9DEBA02E72CAF.gwt.rpc

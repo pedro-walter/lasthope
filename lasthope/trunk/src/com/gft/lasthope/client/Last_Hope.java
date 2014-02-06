@@ -1,152 +1,135 @@
 package com.gft.lasthope.client;
 
-import com.gft.lasthope.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gft.lasthope.client.LoginInfo;
+import com.gft.lasthope.client.LoginService;
+import com.gft.lasthope.client.LoginServiceAsync;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
 public class Last_Hope implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
+	private LoginInfo loginInfo = null;
+	private VerticalPanel loginPanel = new VerticalPanel();
+	private Label loginLabel = new Label("Efetue Login");
+	private Anchor signInLink = new Anchor("Login");
+	private Anchor signOutLink = new Anchor("Logout");
+	AbsolutePanel rootPanel = new AbsolutePanel();
+	AbsolutePanel northPanel = new AbsolutePanel();
+	AbsolutePanel botPanel = new AbsolutePanel();
+	AbsolutePanel midPanel = new AbsolutePanel();
+	AbsolutePanel teste = new AbsolutePanel();
+	AbsolutePanel westPanel = new AbsolutePanel();
+	HorizontalPanel footer = new HorizontalPanel();
+	VerticalPanel vWest = new VerticalPanel();
+	Image background = new Image();
+	Label lblT = new Label();
+	Button btnT = new Button();
 
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
-
-	/**
-	 * This is the entry point method.
-	 */
 	public void onModuleLoad() {
-		final Button sendButton = new Button("Send");
-		final TextBox nameField = new TextBox();
-		nameField.setText("GWT User");
-		final Label errorLabel = new Label();
+		// Check login status using login service.
+		LoginServiceAsync loginService = GWT.create(LoginService.class);
+		loginService.login(GWT.getHostPageBaseURL(),
+				new AsyncCallback<LoginInfo>() {
+					public void onFailure(Throwable error) {
+					}
+					
+					public void onSuccess(LoginInfo result) {
+						loginInfo = result;
+						//somente para desenvolvimento
+						loginInfo.setLogoutUrl(loginInfo.getLogoutUrl() + "Last_Hope.html?gwt.codesvr=127.0.0.1:9997");
+						if (loginInfo.isLoggedIn()) {
+							System.out.println("Load Setup");
+							loadSetup();
+						} else {
+							System.out.println("Load login");
+							loadLogin();
+						}
+					}
+				});
+	}
 
-		// We can add style names to widgets
-		sendButton.addStyleName("sendButton");
+	
+	private void loadSetup(){
+		System.out.println("Load 1");
+		
+		lblT.setSize("10px", "20px");
+		lblT.setText("Teste senha");
+		lblT.setVisible(true);
 
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		RootPanel.get("nameFieldContainer").add(nameField);
-		RootPanel.get("sendButtonContainer").add(sendButton);
-		RootPanel.get("errorLabelContainer").add(errorLabel);
+		// usuario.setSize("100px","25px");
 
-		// Focus the cursor on the name field when the app loads
-		nameField.setFocus(true);
-		nameField.selectAll();
-
-		// Create the popup dialog box
-		final DialogBox dialogBox = new DialogBox();
-		dialogBox.setText("Remote Procedure Call");
-		dialogBox.setAnimationEnabled(true);
-		final Button closeButton = new Button("Close");
-		// We can set the id of a widget by accessing its Element
-		closeButton.getElement().setId("closeButton");
-		final Label textToServerLabel = new Label();
-		final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-		dialogVPanel.add(new HTML("<b>Sending name to the server:</b>"));
-		dialogVPanel.add(textToServerLabel);
-		dialogVPanel.add(new HTML("<br><b>Server replies:</b>"));
-		dialogVPanel.add(serverResponseLabel);
-		dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		dialogVPanel.add(closeButton);
-		dialogBox.setWidget(dialogVPanel);
-
-		// Add a handler to close the DialogBox
-		closeButton.addClickHandler(new ClickHandler() {
+		btnT.setSize("50px", "30px");
+		btnT.setText("OK");
+		btnT.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				dialogBox.hide();
-				sendButton.setEnabled(true);
-				sendButton.setFocus(true);
+				
 			}
+
 		});
 
-		// Create a handler for the sendButton and nameField
-		class MyHandler implements ClickHandler, KeyUpHandler {
-			/**
-			 * Fired when the user clicks on the sendButton.
-			 */
-			public void onClick(ClickEvent event) {
-				sendNameToServer();
-			}
+		teste.getElement().getStyle().setProperty("border", "3px solid #000000");
+		teste.add(lblT, 10, 20);
+		teste.add(btnT, 500, 480);
+		teste.setSize("600px", "530px");
+		
+		System.out.println("Load 2");
 
-			/**
-			 * Fired when the user types in the nameField.
-			 */
-			public void onKeyUp(KeyUpEvent event) {
-				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					sendNameToServer();
-				}
-			}
+		background.setUrl(GWT.getModuleBaseURL() + "Images/background.jpg");
 
-			/**
-			 * Send the name from the nameField to the server and wait for a response.
-			 */
-			private void sendNameToServer() {
-				// First, we validate the input.
-				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				if (!FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
-					return;
-				}
+		//tab = criaTab();
 
-				// Then, we send the input to the server.
-				sendButton.setEnabled(false);
-				textToServerLabel.setText(textToServer);
-				serverResponseLabel.setText("");
-				greetingService.greetServer(textToServer,
-						new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-								dialogBox
-										.setText("Remote Procedure Call - Failure");
-								serverResponseLabel
-										.addStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(SERVER_ERROR);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
+		signOutLink.setHref(loginInfo.getLogoutUrl());
+		
+		footer.setSize("900px", "100px");
+		footer.add(signOutLink);
 
-							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							}
-						});
-			}
-		}
+		botPanel.add(footer);
+		// botPanel.getElement().getStyle().setProperty("border",
+		// "3px solid #000000");
 
-		// Add a handler to send the name to the server
-		MyHandler handler = new MyHandler();
-		sendButton.addClickHandler(handler);
-		nameField.addKeyUpHandler(handler);
+		//vWest = CriaVWest.criaVWest();
+		westPanel.add(vWest);
+		westPanel.setSize("100px", "530px");
+		westPanel.getElement().getStyle()
+				.setProperty("border", "3px solid #000000");
+
+		northPanel.add(new Image("http://www.jmstatsolutions.com/wp-content/themes/JandM_Statistical_Solutions/images/GFT.jpg"));
+
+		midPanel.add(teste);
+		
+		System.out.println("Load 3");
+		
+		rootPanel.add(northPanel, 0, 0);
+		rootPanel.add(botPanel, 0, 800);
+		rootPanel.add(midPanel, 105, 265);
+		rootPanel.add(westPanel, 0, 265);
+		// rootPanel.setStyleName("dockpanel");
+
+		RootLayoutPanel.get().add(rootPanel);
+
+		System.out.println("Load ok");
+		
+		//RootPanel.get().add(signOutLink);
 	}
+	private void loadLogin() {
+		// Assemble login panel.
+		signInLink.setHref(loginInfo.getLoginUrl());
+		loginPanel.add(loginLabel);
+		loginPanel.add(signInLink);
+		RootLayoutPanel.get().add(loginPanel);
+
+	}
+
 }
