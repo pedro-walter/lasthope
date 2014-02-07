@@ -11,10 +11,12 @@ package com.gft.lasthope.client;
  */
 public class Batalha {
 
-    public static void ataqueFisico(Criatura a, Criatura d) {
+    public static String ataqueFisico(Criatura a, Criatura d) {
         int dano;
         int numRolado = Dados.rolarD20(1);
+        String log="";
         System.out.println(numRolado);
+        
         if (numRolado >= (21 - a.getArma().getCriticalRate())) {
             if ("Fisica".equals(a.getArma().getTipo())) {
                 dano = (a.getArma().calculaDano(a.getArma().getDadoArma(), a.getForca())) * a.getArma().getCriticalMultiplier();
@@ -28,6 +30,7 @@ public class Batalha {
                 System.out.println("O inimigo causou: " + dano);
             }
             d.setHp(d.getHp() - dano);
+            
         } else if (numRolado >= d.getDefesa()) {
             if ("Fisica".equals(a.getArma().getTipo())) {
                 dano = a.getArma().calculaDano(a.getArma().getDadoArma(), a.getForca());
@@ -35,17 +38,25 @@ public class Batalha {
                 dano = a.getArma().calculaDano(a.getArma().getDadoArma(), a.getDextreza());
             }
             dano = dano - d.getResistencia();
-            if (a instanceof Personagem) {
-                System.out.println("Voce causou: " + dano);
-            } else {
-                System.out.println("O inimigo causou: " + dano);
-            }
+            Menus.atualizaBattleInfo(dano,a);
+            
+            //if (a instanceof Personagem) {
+                //System.out.println("Voce causou: " + dano);
+                
+            //} else {
+                //System.out.println("O inimigo causou: " + dano);
+                //Menus.atualizaBattleInfo(dano,a);
+            //}
             d.setHp(d.getHp() - dano);
+            
         } else {
             System.out.println("Loser, errou");
         }
+        
         System.out.println(d.getNome() + " esta com " + d.getHp() + " de vida.");
         a.setControladorTempo(a.getControladorTempo() + a.getVelocidade());
+        
+        return log;
     }
 
     public static Criatura calculaVelocidade(Personagem p, Inimigo i) {
@@ -61,6 +72,7 @@ public class Batalha {
             Criatura c = calculaVelocidade(p, i);
             if (c instanceof Personagem) {
                 ataqueFisico(p, i);
+                
             } else {
                 ataqueFisico(i, p);
             }

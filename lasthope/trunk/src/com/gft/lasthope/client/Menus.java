@@ -4,6 +4,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -17,6 +18,10 @@ public class Menus {
 	Button batalha = new Button();
 	Button loja = new Button();
 	Button quest = new Button();
+	Button teste = new Button();
+	Button atacar = new Button();
+	Button defender = new Button();
+	Button sair = new Button();
 	Button inventario = new Button();
 	final TextArea logBattle = new TextArea();
 	AbsolutePanel actions = new AbsolutePanel();
@@ -25,19 +30,20 @@ public class Menus {
 	AbsolutePanel perso = new AbsolutePanel();
 	final Label nomeInimigo = new Label();
 	Label nomePerso = new Label();
-	Label hpAtualInimigo = new Label();
+	static Label hpAtualInimigo = new Label();
 	Label hpMaxInimigo = new Label();
-	Label hpAtualPerso = new Label();
+	static Label hpAtualPerso = new Label();
 	Label hpMaxPerso = new Label();
-	Label hp = new Label("HP");
-	int hpInimigo=20;
-	int hpPerso=20;
-	int dmg=0;
-	Button teste = new Button();
-	Button atacar = new Button();
-	Button defender = new Button();
-	
-	
+	Label hpI = new Label("HP");
+	Label hpP = new Label("HP");
+	int hpInimigo = 20;
+	int hpPerso = 20;
+	int dmg = 0;
+
+
+	Personagem p = new Personagem();
+	Inimigo i = new Inimigo();
+
 	public VerticalPanel criaMenuWest() {
 		VerticalPanel auxV = new VerticalPanel();
 
@@ -46,6 +52,7 @@ public class Menus {
 		batalha.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				batalhaMid();
+				desabilitaMenu();
 			}
 
 		});
@@ -63,6 +70,7 @@ public class Menus {
 		loja.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				lojaMid();
+				//desabilitaMenu();
 			}
 
 		});
@@ -72,6 +80,7 @@ public class Menus {
 		quest.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				questMid();
+				//desabilitaMenu();
 			}
 
 		});
@@ -92,94 +101,29 @@ public class Menus {
 
 	public void batalhaMid() {
 
-		// log
-		// logBattle.setReadOnly(true);
-		logBattle.setTitle("LOG");
-		logBattle.setSize("250px", "500px");
-
-		// botao para atacar
-		atacar.setText("Atacar!");
-		atacar.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				battleAttack();
-			}
-
-		});
-
-		// botao para defender
-		defender.setText("Defender!");
-		defender.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				battleDefend();
-			}
-
-		});
-
-		// painel de acoes
-		actions.setStyleName("battle");
-		actions.add(new HTML("Painel de acoes"), 10, 10);
-		actions.setSize("200px", "300px");
-		actions.add(atacar, 10, 40);
-		actions.add(defender, 10, 80);
-		
-		//informacoes de batalha
-		battleInfo.setStyleName("battleInfo");
-		battleInfo.add(new HTML("Informacoes de batalha"));
-		battleInfo.setSize("300px", "500px");
-		
-		//dentro das informacoes de batalha, vai as informacoes do inimigo e do personagem
-		
-		inimigo.setStyleName("battleInfo");
-		perso.setStyleName("battleInfo");
-		nomeInimigo.setText("Inimigo Teste");
-		nomePerso.setText("Vinicius Teste");
-		
-//		hpMaxInimigo.setText(Integer.toString(hpInimigo));
-//		hpMaxPerso.setText(Integer.toString(hpPerso));
-		
-		hpMaxInimigo.setText(" / "+Integer.toString(hpInimigo));
-		hpMaxPerso.setText(" / "+Integer.toString(hpPerso));
-		inimigo.add(nomeInimigo,10,10);
-		inimigo.add(hp,30,30);
-		inimigo.add(hpMaxInimigo,50,50);
-		perso.add(nomePerso,10,10);
-		perso.add(hp,30,30);
-		perso.add(hpMaxPerso,50,50);
-		
-		teste.setText("Teste mudar");
-		teste.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				nomeInimigo.setText("");
-				nomeInimigo.setText("TESTEEEEE");
-			}
-
-		});
-		
-		battleInfo.add(inimigo);
-		battleInfo.add(perso);
-		//battleInfo.add(teste);
-		
-		
-
-		// add`s
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.setStyleName("battle");
-		Last_Hope.midPanel.add(new HTML("Log de Batalha"), 10, 0);
-		Last_Hope.midPanel.add(logBattle, 10, 30);
-		Last_Hope.midPanel.add(actions, 300, 100);
-		Last_Hope.midPanel.add(battleInfo,550,50);
-
+		
+		
+		
+		logBattle();
+		actionsPanel();
+		battleInfo();
+		sairMid();
+		
 	}
 
 	private void lojaMid() {
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.add(new HTML("lojinha do Abu"));
+		
 	}
 
 	private void questMid() {
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.add(new HTML("1 - descer a lenha nos goblin"));
 		Last_Hope.midPanel.add(new HTML("2 - ajudar a veia a atravesar a rua"));
+		
 	}
 
 	private void battleAttack() {
@@ -193,13 +137,13 @@ public class Menus {
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
-		
-		dmg=1;
-		
-		atualizaBattleInfo();
+
+		dmg = 1;
+
+		//atualizaBattleInfo(dmg);
 	}
-	
-	private void battleDefend(){
+
+	private void battleDefend() {
 		String l;
 
 		l = logBattle.getText();
@@ -210,14 +154,139 @@ public class Menus {
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
-		
-		dmg=0;
-		
-		atualizaBattleInfo();
+
+		dmg = 0;
+
+		//atualizaBattleInfo(dmg);
+	}
+
+	static void atualizaBattleInfo(int d, Criatura c) {
+		int i;
+		if (c instanceof Personagem) {
+			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
+			hpAtualInimigo.setText(Integer.toString(i));
+			
+		}else{
+			i = Integer.valueOf(hpAtualPerso.getText()) - d;
+			hpAtualPerso.setText(Integer.toString(i));
+		}
+	}
+
+	private void logBattle() {
+
+		logBattle.setTitle("LOG");
+		logBattle.setSize("250px", "500px");
+		Last_Hope.midPanel.add(new HTML("Log de Batalha"), 10, 0);
+		Last_Hope.midPanel.add(logBattle, 10, 30);
+	}
+
+	private void actionsPanel() {
+
+		// botao para atacar
+		atacar.setText("Atacar!");
+		atacar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				battleAttack();
+			}
+
+		});
+
+//		// botao para defender
+//		defender.setText("Defender!");
+//		defender.addClickHandler(new ClickHandler() {
+//			public void onClick(ClickEvent event) {
+//				battleDefend();
+//			}
+//
+//		});
+
+		// painel de acoes
+		actions.setStyleName("battle");
+		actions.add(new HTML("Painel de acoes"), 10, 10);
+		actions.setSize("200px", "300px");
+		actions.add(atacar, 10, 40);
+		//actions.add(defender, 10, 80);
+
+		Last_Hope.midPanel.add(actions, 300, 100);
+	}
+
+	private void battleInfo() {
+
+		// informacoes de batalha
+		battleInfo.setStyleName("battleInfo");
+		battleInfo.add(new HTML("Informacoes de batalha"));
+		battleInfo.setSize("300px", "500px");
+
+		// dentro das informacoes de batalha, vai as informacoes do inimigo e do
+		// personagem
+
+		inimigo.setStyleName("battleInfo");
+		perso.setStyleName("battleInfo");
+		inimigo.setSize("293px", "220px");
+		perso.setSize("293px", "220px");
+
+		nomeInimigo.setText(p.getNome());
+		nomePerso.setText(i.getNome());
+
+		// hpMaxInimigo.setText(Integer.toString(hpInimigo));
+		// hpMaxPerso.setText(Integer.toString(hpPerso));
+
+		hpAtualInimigo.setText(Integer.toString(i.getHp()));
+		hpAtualPerso.setText(Integer.toString(p.getHp()));
+		hpMaxInimigo.setText(" / " + Integer.toString(i.getHpMax()));
+		hpMaxPerso.setText(" / " + Integer.toString(p.getHpMax()));
+
+		inimigo.add(nomeInimigo, 5, 5);
+		inimigo.add(hpI, 5, 25);
+		inimigo.add(hpAtualInimigo, 25, 25);
+		inimigo.add(hpMaxInimigo, 45, 25);
+
+		perso.add(nomePerso, 5, 5);
+		perso.add(hpP, 5, 25);
+		perso.add(hpAtualPerso, 25, 25);
+		perso.add(hpMaxPerso, 45, 25);
+
+		// teste.setText("Teste mudar");
+		// teste.addClickHandler(new ClickHandler() {
+		// public void onClick(ClickEvent event) {
+		// hpInimigo=1;
+		// hpAtualInimigo.setText(Integer.toString(hpInimigo));
+		// }
+		//
+		// });
+
+		battleInfo.add(inimigo);
+		battleInfo.add(perso);
+		// battleInfo.add(teste);
+
+		Last_Hope.midPanel.add(battleInfo, 550, 50);
 	}
 	
-	private void atualizaBattleInfo(){
+	private void desabilitaMenu(){
+		batalha.setEnabled(false);
+		loja.setEnabled(false);
+		quest.setEnabled(false);
+	}
+	
+	private void habilitaMenu(){
+		batalha.setEnabled(true);
+		loja.setEnabled(true);
+		quest.setEnabled(true);
+	}
+	
+	private void sairMid(){
+		sair.setText("Sair");
+		sair.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				if(Window.confirm("Deseja Realmente Sair?")){
+					Last_Hope.midPanel.clear();
+					habilitaMenu();
+				}
+			}
+
+		});
 		
+		Last_Hope.midPanel.add(sair,850,550);
 	}
 
 }
