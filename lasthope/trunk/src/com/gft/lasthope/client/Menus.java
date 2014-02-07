@@ -5,9 +5,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Menus {
@@ -16,9 +15,24 @@ public class Menus {
 	Button quest = new Button();
 	final TextArea logBattle = new TextArea();
 	AbsolutePanel actions = new AbsolutePanel();
+	AbsolutePanel battleInfo = new AbsolutePanel();
+	AbsolutePanel inimigo = new AbsolutePanel();
+	AbsolutePanel perso = new AbsolutePanel();
+	final Label nomeInimigo = new Label();
+	Label nomePerso = new Label();
+	Label hpAtualInimigo = new Label();
+	Label hpMaxInimigo = new Label();
+	Label hpAtualPerso = new Label();
+	Label hpMaxPerso = new Label();
+	Label hp = new Label("HP");
+	int hpInimigo=20;
+	int hpPerso=20;
+	int dmg=0;
+	Button teste = new Button();
 	Button atacar = new Button();
 	Button defender = new Button();
-
+	
+	
 	public VerticalPanel criaMenuWest() {
 		VerticalPanel auxV = new VerticalPanel();
 
@@ -88,6 +102,45 @@ public class Menus {
 		actions.setSize("200px", "300px");
 		actions.add(atacar, 10, 40);
 		actions.add(defender, 10, 80);
+		
+		//informacoes de batalha
+		battleInfo.setStyleName("battleInfo");
+		battleInfo.add(new HTML("Informacoes de batalha"));
+		battleInfo.setSize("300px", "500px");
+		
+		//dentro das informacoes de batalha, vai as informacoes do inimigo e do personagem
+		
+		inimigo.setStyleName("battleInfo");
+		perso.setStyleName("battleInfo");
+		nomeInimigo.setText("Inimigo Teste");
+		nomePerso.setText("Vinicius Teste");
+		
+//		hpMaxInimigo.setText(Integer.toString(hpInimigo));
+//		hpMaxPerso.setText(Integer.toString(hpPerso));
+		
+		hpMaxInimigo.setText(" / "+Integer.toString(hpInimigo));
+		hpMaxPerso.setText(" / "+Integer.toString(hpPerso));
+		inimigo.add(nomeInimigo,10,10);
+		inimigo.add(hp,30,30);
+		inimigo.add(hpMaxInimigo,50,50);
+		perso.add(nomePerso,10,10);
+		perso.add(hp,30,30);
+		perso.add(hpMaxPerso,50,50);
+		
+		teste.setText("Teste mudar");
+		teste.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				nomeInimigo.setText("");
+				nomeInimigo.setText("TESTEEEEE");
+			}
+
+		});
+		
+		battleInfo.add(inimigo);
+		battleInfo.add(perso);
+		//battleInfo.add(teste);
+		
+		
 
 		// add`s
 		Last_Hope.midPanel.clear();
@@ -95,6 +148,7 @@ public class Menus {
 		Last_Hope.midPanel.add(new HTML("Log de Batalha"), 10, 0);
 		Last_Hope.midPanel.add(logBattle, 10, 30);
 		Last_Hope.midPanel.add(actions, 300, 100);
+		Last_Hope.midPanel.add(battleInfo,550,50);
 
 	}
 
@@ -120,6 +174,10 @@ public class Menus {
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
+		
+		dmg=1;
+		
+		atualizaBattleInfo();
 	}
 	
 	private void battleDefend(){
@@ -133,6 +191,14 @@ public class Menus {
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
+		
+		dmg=0;
+		
+		atualizaBattleInfo();
+	}
+	
+	private void atualizaBattleInfo(){
+		
 	}
 
 }
