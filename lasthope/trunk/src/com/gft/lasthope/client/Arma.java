@@ -71,6 +71,24 @@ public class Arma extends Item{
         return dano;
     }
 
+    public int calculaDano1d12(int attPersonagem) {
+        int dano;
+        dano = Dados.rolarD12(1) + attPersonagem;
+        return dano;
+    }
+
+    public int calculaDano2d6(int attPersonagem) {
+        int dano;
+        dano = Dados.rolarD6(2) + attPersonagem;
+        return dano;
+    }
+
+    public int calculaDano2d4(int attPersonagem) {
+        int dano;
+        dano = Dados.rolarD4(2) + attPersonagem;
+        return dano;
+    }
+
 
 
     /**
