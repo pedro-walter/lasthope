@@ -1,11 +1,15 @@
 package com.gft.lasthope.client;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -13,6 +17,7 @@ public class Menus {
 	Button batalha = new Button();
 	Button loja = new Button();
 	Button quest = new Button();
+	Button inventario = new Button();
 	final TextArea logBattle = new TextArea();
 	AbsolutePanel actions = new AbsolutePanel();
 	AbsolutePanel battleInfo = new AbsolutePanel();
@@ -44,8 +49,16 @@ public class Menus {
 			}
 
 		});
+		
+		inventario.setText("Inventário");
+		inventario.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				inventarioMid();
+			}
 
-		// loja
+		});
+		
+		//loja
 		loja.setText("Loja");
 		loja.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -67,8 +80,14 @@ public class Menus {
 		auxV.add(batalha);
 		auxV.add(loja);
 		auxV.add(quest);
+		auxV.add(inventario);
 
 		return auxV;
+	}
+
+	protected void inventarioMid() {
+		Last_Hope.midPanel.clear();
+		Last_Hope.midPanel.add(new InventarioPanel());
 	}
 
 	public void batalhaMid() {

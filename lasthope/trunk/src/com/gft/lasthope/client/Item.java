@@ -18,7 +18,7 @@ public class Item {
     public Map listaArmas = new HashMap<>();
     private int id;
     private String nome;
-
+    private double price;
 
     public void atualizaArmas() {
 
@@ -56,5 +56,10 @@ public class Item {
     public void setId(int id) {
         this.id = id;
     }
-
+    public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
 }
