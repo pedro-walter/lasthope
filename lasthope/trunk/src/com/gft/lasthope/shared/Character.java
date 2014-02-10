@@ -45,27 +45,27 @@ public class Character extends Creature {
 
     public Character criaPersonagem() {
         Character p = new Character();
-  //      p.setNome(JOptionPane.showInputDialog("Nome do personagem: "));
+        p.setRace(escolheRaca(p));
         p.setProfession(escolheClasse(p));
+
         return p;
     }
 
     public String escolheClasse(Character p) {
         String classe="Warrior";
-      //  classe = JOptionPane.showInputDialog("Guerreiro, Arqueiro, Mago");
         switch (classe) {
             case "Warrior":
-                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
+                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, this.getSpeed() - 0.1);
                 break;
             case "Archer":
-                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 4, this.getIntellect() + 1, this.getCharisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, 0.8);
+                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 4, this.getIntellect() + 1, this.getCharisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, this.getSpeed() - 0.2);
                 break;
             case "Mage":
-                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, 1);
+                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, this.getSpeed());
                 break;
             default:
                 classe = "Warrior";
-                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
+                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, this.getSpeed() - 0.1);
                 break;
         }
         return classe;
@@ -73,7 +73,6 @@ public class Character extends Creature {
 
     public String escolheRaca(Character p) {
         String raca="Human";
-    //    raca = JOptionPane.showInputDialog("Humano, Elfo, Anao");
         switch (raca) {
             case "Human":
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);

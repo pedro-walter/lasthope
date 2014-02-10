@@ -36,40 +36,40 @@ public class Item {
 
     public void updateArmors() {
 
-        Armor ar = new Armor(21,"Leather Armor","Light",2);
+        Armor ar = new Armor(3,"Leather Armor","Light",2);
         listArmors.put(1, ar);
 
-        ar = new Armor(22,"Steel Armor","Medium",3);
+        ar = new Armor(4,"Steel Armor","Medium",3);
         listArmors.put(2, ar);
 
     }
 
     public void updateHelmets() {
 
-        Helmet ar = new Helmet(21,"Leather Helmet","Light",1);
+        Helmet ar = new Helmet(5,"Leather Helmet","Light",1);
         listHelmets.put(1, ar);
 
-        ar = new Helmet(22,"Steel Helmet","Medium",2);
+        ar = new Helmet(6,"Steel Helmet","Medium",2);
         listHelmets.put(2, ar);
 
     }
 
     public void updateBoots() {
 
-        Boot ar = new Boot(21,"Leather Boots","Light",1);
+        Boot ar = new Boot(7,"Leather Boots","Light",1);
         listBoots.put(1, ar);
 
-        ar = new Boot(22,"Steel Boots","Medium",2);
+        ar = new Boot(8,"Steel Boots","Medium",2);
         listBoots.put(2, ar);
 
     }
 
     public void updateShields() {
 
-        Shield ar = new Shield(21,"Wooden Shield","Light",2);
+        Shield ar = new Shield(9,"Wooden Shield","Light",2);
         listShields.put(1, ar);
 
-        ar = new Shield(22,"Steel Shield","Medium",3);
+        ar = new Shield(10,"Steel Shield","Medium",3);
         listShields.put(2, ar);
 
     }
