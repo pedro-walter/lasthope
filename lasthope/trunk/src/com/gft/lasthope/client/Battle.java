@@ -43,7 +43,7 @@ public class Battle {
                 dano = a.getWeapon().calculaDano(a.getWeapon().getDadoArma(), a.getDexterity());
             }
             dano = dano - d.getResist();
-            Menus.atualizaBattleInfo(dano,a);
+            BatalhaPanel.atualizaBattleInfo(dano,a);
 
             //if (a instanceof Personagem) {
                 //System.out.println("Voce causou: " + dano);
