@@ -9,7 +9,7 @@ package com.gft.lasthope.shared;
  *
  * @author JOSR
  */
-public class Arma extends Item{
+public class Weapon extends Item{
 
     private int criticalRate;
     private int criticalMultiplier;
@@ -17,7 +17,7 @@ public class Arma extends Item{
     private String tipo;
 
 
-    Arma(int id, int dadoArma, int criticalMultiplier, int criticalRate, String nome, String tipo){
+    public Weapon(int id, int dadoArma, int criticalMultiplier, int criticalRate, String nome, String tipo){
         this.setId(id);
         this.setDadoArma(dadoArma);
         this.setCriticalMultiplier(criticalMultiplier);
@@ -49,43 +49,43 @@ public class Arma extends Item{
 
     public int calculaDano1d4(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD4(1) + attPersonagem;
+        dano = Dices.rolarD4(1) + attPersonagem;
         return dano;
     }
 
     public int calculaDano1d6(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD6(1) + attPersonagem;
+        dano = Dices.rolarD6(1) + attPersonagem;
         return dano;
     }
 
     public int calculaDano1d8(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD8(1) + attPersonagem;
+        dano = Dices.rolarD8(1) + attPersonagem;
         return dano;
     }
 
     public int calculaDano1d10(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD10(1) + attPersonagem;
+        dano = Dices.rolarD10(1) + attPersonagem;
         return dano;
     }
 
     public int calculaDano1d12(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD12(1) + attPersonagem;
+        dano = Dices.rolarD12(1) + attPersonagem;
         return dano;
     }
 
     public int calculaDano2d6(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD6(2) + attPersonagem;
+        dano = Dices.rolarD6(2) + attPersonagem;
         return dano;
     }
 
     public int calculaDano2d4(int attPersonagem) {
         int dano;
-        dano = Dados.rolarD4(2) + attPersonagem;
+        dano = Dices.rolarD4(2) + attPersonagem;
         return dano;
     }
 

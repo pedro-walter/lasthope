@@ -2,10 +2,10 @@ package com.gft.lasthope.shared;
 
 import java.util.List;
 
-public class Inimigo extends Criatura {
+public class Enemy extends Creature {
 
-	public Inimigo criaInimigo(int idInimigo){
-		Inimigo inimigo = new Inimigo();
+	public Enemy criaInimigo(int idInimigo){
+		Enemy inimigo = new Enemy();
 		switch(idInimigo){
 		//Nome, Forc, Dex, Int, Char, Hp, Mp, Xp, Lvl, Res, Spd
 		case 1: atualizaInimigo("Goblin", 1, 1, 1, 1, 10, 5, 10, 1, 0, 1);

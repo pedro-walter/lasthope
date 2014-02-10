@@ -6,26 +6,26 @@ package com.gft.lasthope.shared;
  * and open the template in the editor.
  */
 
-import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author JOSR
  */
-public class Personagem extends Criatura {
+public class Character extends Creature {
 
     private int statPoints = 0;
 
-    public Personagem() {
+    public Character() {
 
     }
 
-    public void evoluir(Personagem p) {
+    public void evoluir(Character p) {
         p.setExp(getExp() - getLevel() * 100);
         p.setLevel(getLevel() + 1);
         p.setSpeed(p.getSpeed()-0.04);
         p.statPoints = statPoints + 3;
-        System.out.println("Voce evoluiu para o level " + p.getLevel());
+        System.out.println("Your level has been increased to " + p.getLevel());
     }
 
     public void morrer() {
@@ -34,8 +34,8 @@ public class Personagem extends Criatura {
         setExp(getExp() - xpLostLong);
     }
 
-    public void ganharBatalha(Personagem p, long xpMonstro) {
-        System.out.println("Voce ganhou a batalha!!!");
+    public void ganharBatalha(Character p, long xpMonstro) {
+        System.out.println("You win the battle!!!");
         p.setExp(p.getExp() + xpMonstro);
         p.setHp(p.getHpMax());
         if (p.getExp() >= p.getLevel() * 100) {
@@ -43,49 +43,49 @@ public class Personagem extends Criatura {
         }
     }
 
-    public Personagem criaPersonagem() {
-        Personagem p = new Personagem();
+    public Character criaPersonagem() {
+        Character p = new Character();
   //      p.setNome(JOptionPane.showInputDialog("Nome do personagem: "));
         p.setProfession(escolheClasse(p));
         return p;
     }
 
-    public String escolheClasse(Personagem p) {
-        String classe="Guerreiro";
+    public String escolheClasse(Character p) {
+        String classe="Warrior";
       //  classe = JOptionPane.showInputDialog("Guerreiro, Arqueiro, Mago");
         switch (classe) {
-            case "Guerreiro":
+            case "Warrior":
                 atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
                 break;
-            case "Arqueiro":
+            case "Archer":
                 atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 4, this.getIntellect() + 1, this.getCharisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, 0.8);
                 break;
-            case "Mago":
+            case "Mage":
                 atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, 1);
                 break;
             default:
-                classe = "Guerreiro";
+                classe = "Warrior";
                 atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
                 break;
         }
         return classe;
     }
 
-    public String escolheRaca(Personagem p) {
-        String raca="Humano";
+    public String escolheRaca(Character p) {
+        String raca="Human";
     //    raca = JOptionPane.showInputDialog("Humano, Elfo, Anao");
         switch (raca) {
-            case "Humano":
+            case "Human":
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
                 break;
-            case "Elfo":
+            case "Elf":
                 atualizaPersonagem(0, 2, 1, 0, 10, 5, 0.95);
                 break;
-            case "Anao":
+            case "Dwarf":
                 atualizaPersonagem(2, 0, 0, 0, 15, 5, 1);
                 break;
             default:
-                raca = "Humano";
+                raca = "Human";
                 atualizaPersonagem(p.getStrength() + 1, p.getDexterity() + 1, p.getIntellect() + 1, p.getCharisma() + 1, p.getHpMax(), p.getMpMax(), p.getSpeed());
                 break;
         }
@@ -102,6 +102,11 @@ public class Personagem extends Criatura {
         this.setMpMax(mpMax);
         this.setMp(mpMax);
         this.setSpeed(velocidade);
+    }
+
+    public int updateDefense(){
+    	int totalDefense=getBaseDefense()+Equip.returnDefense(getArmor(), getShield(), getBoot(), getHelmet());
+    	return totalDefense;
     }
 
 }

@@ -12,16 +12,16 @@ import java.util.List;
  *
  * @author JOSR
  */
-public class Criatura {
+public class Creature {
 
     private String name;
-    private String race; //ainda nao
-    private String profession; //ainda nao
+    private String race;
+    private String profession;
     private int strength=4;
     private int dexterity=1;
     private int intellect=1; //ainda nao
     private int charisma=1; //ainda nao
-    private double speed=1; //ainda nao
+    private double speed=1;
     private int hp=10;
     private int mp=10;
     private int hpMax=10;
@@ -32,9 +32,12 @@ public class Criatura {
     private long exp=10;
     private int gold=0;
     private int level=1;
-    private Arma weapon;
-    //private int armadura;
-    private int resist=0; //ainda nao
+    private Weapon weapon;
+    private Helmet helmet;
+    private Armor armor;
+    private Boot boot;
+    private Shield shield;
+	private int resist=0;
     //private List bolsa;
     private List feats; //ainda nao
     private List spells; //ainda nao
@@ -540,16 +543,48 @@ public class Criatura {
 		this.level = level;
 	}
 
-	public Arma getWeapon() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
 
-	public void setWeapon(Arma weapon) {
+	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+    public Armor getArmor() {
+		return armor;
+	}
+
+	public void setArmor(Armor armor) {
+		this.armor = armor;
+	}
+
+	public Helmet getHelmet() {
+		return helmet;
+	}
+
+	public void setHelmet(Helmet helmet) {
+		this.helmet = helmet;
+	}
+
+	public Boot getBoot() {
+		return boot;
+	}
+
+	public void setBoot(Boot boot) {
+		this.boot = boot;
+	}
+
+	public Shield getShield() {
+		return shield;
+	}
+
+	public void setShield(Shield shield) {
+		this.shield = shield;
 	}
 
 }

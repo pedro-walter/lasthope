@@ -1,6 +1,6 @@
 package com.gft.lasthope.shared;
 
-public class Conta {
+public class Account {
 	static String usuario="vinicius";
 	static String senha="270388";
 	

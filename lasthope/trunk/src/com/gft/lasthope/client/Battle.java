@@ -1,9 +1,9 @@
 package com.gft.lasthope.client;
 
-import com.gft.lasthope.shared.Criatura;
-import com.gft.lasthope.shared.Dados;
-import com.gft.lasthope.shared.Inimigo;
-import com.gft.lasthope.shared.Personagem;
+import com.gft.lasthope.shared.Creature;
+import com.gft.lasthope.shared.Dices;
+import com.gft.lasthope.shared.Enemy;
+import com.gft.lasthope.shared.Character;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,57 +14,57 @@ import com.gft.lasthope.shared.Personagem;
  *
  * @author JOSR
  */
-public class Batalha {
+public class Battle {
 
-    public static String ataqueFisico(Criatura a, Criatura d) {
+    public static String ataqueFisico(Creature a, Creature d) {
         int dano;
-        int numRolado = Dados.rolarD20(1);
+        int numRolado = Dices.rolarD20(1);
         String log="";
         System.out.println(numRolado);
-        
+
         if (numRolado >= (21 - a.getWeapon().getCriticalRate())) {
-            if ("Fisica".equals(a.getWeapon().getTipo())) {
+            if ("Physical".equals(a.getWeapon().getTipo())) {
                 dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(), a.getStrength())) * a.getWeapon().getCriticalMultiplier();
             } else {
                 dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(), a.getDexterity())) * a.getWeapon().getCriticalMultiplier();
             }
             dano = dano - d.getResist();
-            if (a instanceof Personagem) {
-                System.out.println("Voce causou: " + dano);
+            if (a instanceof Character) {
+                System.out.println("You dealt: " + dano);
             } else {
-                System.out.println("O inimigo causou: " + dano);
+                System.out.println("The enemy dealt: " + dano);
             }
             d.setHp(d.getHp() - dano);
-            
+
         } else if (numRolado >= d.getDefense()) {
-            if ("Fisica".equals(a.getWeapon().getTipo())) {
+            if ("Physical".equals(a.getWeapon().getTipo())) {
                 dano = a.getWeapon().calculaDano(a.getWeapon().getDadoArma(), a.getStrength());
             } else {
                 dano = a.getWeapon().calculaDano(a.getWeapon().getDadoArma(), a.getDexterity());
             }
             dano = dano - d.getResist();
             Menus.atualizaBattleInfo(dano,a);
-            
+
             //if (a instanceof Personagem) {
                 //System.out.println("Voce causou: " + dano);
-                
+
             //} else {
                 //System.out.println("O inimigo causou: " + dano);
                 //Menus.atualizaBattleInfo(dano,a);
             //}
             d.setHp(d.getHp() - dano);
-            
+
         } else {
-            System.out.println("Loser, errou");
+            System.out.println("Loser, you missed");
         }
-        
-        System.out.println(d.getName() + " esta com " + d.getHp() + " de vida.");
+
+        System.out.println(d.getName() + " is with " + d.getHp() + " HP.");
         a.setControladorTempo(a.getControladorTempo() + a.getSpeed());
-        
+
         return log;
     }
 
-    public static Criatura calculaVelocidade(Personagem p, Inimigo i) {
+    public static Creature calculaVelocidade(Character p, Enemy i) {
         if (p.getControladorTempo() <= i.getControladorTempo()) {
             return p;
         } else {
@@ -72,12 +72,12 @@ public class Batalha {
         }
     }
 
-    public static void aBatalhaQueVaiGirando(Personagem p, Inimigo i) {
+    public static void aBatalhaQueVaiGirando(Character p, Enemy i) {
         while ((p.getHp() >= 1) && (i.getHp() >= 1)) {
-            Criatura c = calculaVelocidade(p, i);
-            if (c instanceof Personagem) {
+            Creature c = calculaVelocidade(p, i);
+            if (c instanceof Character) {
                 ataqueFisico(p, i);
-                
+
             } else {
                 ataqueFisico(i, p);
             }

@@ -1,6 +1,6 @@
 package com.gft.lasthope.shared;
 
-public class Dados {
+public class Dices {
 
 	public static int rolarD4(int quant){
 		int soma=0;

@@ -1,8 +1,8 @@
 package com.gft.lasthope.client;
 
-import com.gft.lasthope.shared.Criatura;
-import com.gft.lasthope.shared.Inimigo;
-import com.gft.lasthope.shared.Personagem;
+import com.gft.lasthope.shared.Creature;
+import com.gft.lasthope.shared.Enemy;
+import com.gft.lasthope.shared.Character;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -44,8 +44,8 @@ public class Menus {
 	int dmg = 0;
 
 
-	Personagem p = new Personagem();
-	Inimigo i = new Inimigo();
+	Character p = new Character();
+	Enemy i = new Enemy();
 
 	public VerticalPanel criaMenuWest() {
 		VerticalPanel auxV = new VerticalPanel();
@@ -163,9 +163,9 @@ public class Menus {
 		//atualizaBattleInfo(dmg);
 	}
 
-	static void atualizaBattleInfo(int d, Criatura c) {
+	static void atualizaBattleInfo(int d, Creature c) {
 		int i;
-		if (c instanceof Personagem) {
+		if (c instanceof Character) {
 			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
 			hpAtualInimigo.setText(Integer.toString(i));
 			
