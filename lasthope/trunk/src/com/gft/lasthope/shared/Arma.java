@@ -1,4 +1,4 @@
-package com.gft.lasthope.client;
+package com.gft.lasthope.shared;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

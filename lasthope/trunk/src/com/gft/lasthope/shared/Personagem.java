@@ -1,4 +1,4 @@
-package com.gft.lasthope.client;
+package com.gft.lasthope.shared;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,29 +16,29 @@ public class Personagem extends Criatura {
 
     private int statPoints = 0;
 
-    Personagem() {
+    public Personagem() {
 
     }
 
     public void evoluir(Personagem p) {
-        p.setExperiencia(getExperiencia() - getLevel() * 100);
+        p.setExp(getExp() - getLevel() * 100);
         p.setLevel(getLevel() + 1);
-        p.setVelocidade(p.getVelocidade()-0.04);
+        p.setSpeed(p.getSpeed()-0.04);
         p.statPoints = statPoints + 3;
         System.out.println("Voce evoluiu para o level " + p.getLevel());
     }
 
     public void morrer() {
-        double xpLost = getExperiencia() * 0.1;
+        double xpLost = getExp() * 0.1;
         long xpLostLong = Math.round(xpLost);
-        setExperiencia(getExperiencia() - xpLostLong);
+        setExp(getExp() - xpLostLong);
     }
 
     public void ganharBatalha(Personagem p, long xpMonstro) {
         System.out.println("Voce ganhou a batalha!!!");
-        p.setExperiencia(p.getExperiencia() + xpMonstro);
+        p.setExp(p.getExp() + xpMonstro);
         p.setHp(p.getHpMax());
-        if (p.getExperiencia() >= p.getLevel() * 100) {
+        if (p.getExp() >= p.getLevel() * 100) {
             evoluir(p);
         }
     }
@@ -46,7 +46,7 @@ public class Personagem extends Criatura {
     public Personagem criaPersonagem() {
         Personagem p = new Personagem();
   //      p.setNome(JOptionPane.showInputDialog("Nome do personagem: "));
-        p.setClasse(escolheClasse(p));
+        p.setProfession(escolheClasse(p));
         return p;
     }
 
@@ -55,17 +55,17 @@ public class Personagem extends Criatura {
       //  classe = JOptionPane.showInputDialog("Guerreiro, Arqueiro, Mago");
         switch (classe) {
             case "Guerreiro":
-                atualizaPersonagem(this.getForca() + 4, this.getDextreza() + 2, this.getInteligencia() + 1, this.getCarisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
+                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
                 break;
             case "Arqueiro":
-                atualizaPersonagem(this.getForca() + 1, this.getDextreza() + 4, this.getInteligencia() + 1, this.getCarisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, 0.8);
+                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 4, this.getIntellect() + 1, this.getCharisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, 0.8);
                 break;
             case "Mago":
-                atualizaPersonagem(this.getForca() + 1, this.getDextreza() + 1, this.getInteligencia() + 4, this.getCarisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, 1);
+                atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, 1);
                 break;
             default:
                 classe = "Guerreiro";
-                atualizaPersonagem(this.getForca() + 4, this.getDextreza() + 2, this.getInteligencia() + 1, this.getCarisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
+                atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, 0.9);
                 break;
         }
         return classe;
@@ -86,22 +86,22 @@ public class Personagem extends Criatura {
                 break;
             default:
                 raca = "Humano";
-                atualizaPersonagem(p.getForca() + 1, p.getDextreza() + 1, p.getInteligencia() + 1, p.getCarisma() + 1, p.getHpMax(), p.getMpMax(), p.getVelocidade());
+                atualizaPersonagem(p.getStrength() + 1, p.getDexterity() + 1, p.getIntellect() + 1, p.getCharisma() + 1, p.getHpMax(), p.getMpMax(), p.getSpeed());
                 break;
         }
         return raca;
     }
 
     public void atualizaPersonagem(int forca, int dext, int inte, int caris, int hpMax, int mpMax, double velocidade) {
-        this.setForca(forca);
-        this.setDextreza(dext);
-        this.setInteligencia(inte);
-        this.setCarisma(caris);
+        this.setStrength(forca);
+        this.setDexterity(dext);
+        this.setIntellect(inte);
+        this.setCharisma(caris);
         this.setHpMax(hpMax);
         this.setHp(hpMax);
         this.setMpMax(mpMax);
         this.setMp(mpMax);
-        this.setVelocidade(velocidade);
+        this.setSpeed(velocidade);
     }
 
 }

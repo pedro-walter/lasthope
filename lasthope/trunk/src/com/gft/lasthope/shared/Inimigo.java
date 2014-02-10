@@ -1,4 +1,4 @@
-package com.gft.lasthope.client;
+package com.gft.lasthope.shared;
 
 import java.util.List;
 
@@ -21,19 +21,19 @@ public class Inimigo extends Criatura {
 	}
 
 	public void atualizaInimigo(String nome, int forca, int dextreza, int inteligencia, int carisma, int hp, int mp, int exp, int level, int resistencia, double velocidade){
-		setNome(nome);
-		setForca(forca);
-		setDextreza(dextreza);
-		setInteligencia(inteligencia);
-		setCarisma(carisma);
+		setName(nome);
+		setStrength(forca);
+		setDexterity(dextreza);
+		setIntellect(inteligencia);
+		setCharisma(carisma);
 		setHp(hp);
 		setHpMax(hp);
 		setMp(mp);
 		setMpMax(mp);
-		setExperiencia(exp);
+		setExp(exp);
 		setLevel(level);
-		setResistencia(resistencia);
-		setVelocidade(velocidade);
+		setResist(resistencia);
+		setSpeed(velocidade);
 	}
 
 /*	private String nome;

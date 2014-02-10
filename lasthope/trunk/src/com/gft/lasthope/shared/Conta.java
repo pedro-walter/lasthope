@@ -1,4 +1,4 @@
-package com.gft.lasthope.client;
+package com.gft.lasthope.shared;
 
 public class Conta {
 	static String usuario="vinicius";

@@ -1,5 +1,8 @@
 package com.gft.lasthope.client;
 
+import com.gft.lasthope.shared.Criatura;
+import com.gft.lasthope.shared.Inimigo;
+import com.gft.lasthope.shared.Personagem;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -225,8 +228,8 @@ public class Menus {
 		inimigo.setSize("293px", "220px");
 		perso.setSize("293px", "220px");
 
-		nomeInimigo.setText(p.getNome());
-		nomePerso.setText(i.getNome());
+		nomeInimigo.setText(p.getName());
+		nomePerso.setText(i.getName());
 
 		// hpMaxInimigo.setText(Integer.toString(hpInimigo));
 		// hpMaxPerso.setText(Integer.toString(hpPerso));
