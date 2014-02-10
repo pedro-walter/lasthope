@@ -30,7 +30,7 @@ public class BatalhaPanel extends AbsolutePanel {
 	Label hpI = new Label("HP");
 	Label hpP = new Label("HP");
 	static Button sair = new BotaoSair();
-	Button atacar = new Button();
+	static Button atacar = new Button();
 	Button defender = new Button();
 	int hpInimigo = 20;
 	int hpPerso = 20;
@@ -41,25 +41,28 @@ public class BatalhaPanel extends AbsolutePanel {
 	Enemy i = new Enemy();
 	Item it = new Item();
 	Weapon w;
-		
+
 	public BatalhaPanel() {
-		
+
 		it.updateWeapons();
-		
+
 		p.setName("PersonagemT");
 		i.setName("Goblin");
-		
+
+		p.setHp(30);
+		i.setHp(30);
+
 		p.setControladorTempo(1);
 		i.setControladorTempo(1);
-		
+
 		p.setWeapon((Weapon) it.listWeapons.get(2));
 		i.setWeapon((Weapon) it.listWeapons.get(2));
-		
+
 		logBattle();
 		actionsPanel();
 		battleInfo();
 		sairBattle();
-		
+
 	}
 
 	private void battleAttack() {
@@ -85,33 +88,39 @@ public class BatalhaPanel extends AbsolutePanel {
 		// atualizaBattleInfo(dmg);
 	}
 
-	static void atualizaBattleInfo(int d, Creature c) {
+	static void atualizaBattleInfo(int d, Creature c, boolean crit) {
 		int i;
 		String log;
-		
+
 		if (c instanceof Character) {
-			
+
 			i = Integer.valueOf(hpAtualPerso.getText()) - d;
 			hpAtualPerso.setText(Integer.toString(i));
-			
-			log="Inimigo causou "+Integer.toString(d);
-			
+
+			if (crit) {
+				log = "Ataque Critico! Inimigo causou " + Integer.toString(d);
+			} else {
+				log = "Inimigo causou " + Integer.toString(d);
+			}
 			setLog(log);
-			
+
 			System.out.println("Chegou ate atualizaBattleInfo e entrou em c");
-			
 
 		} else {
-			
+
 			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
 			hpAtualInimigo.setText(Integer.toString(i));
-			
-			log="Voce Causou "+Integer.toString(d);
-			
+
+			if (crit) {
+				log = "Ataque Critico! Voce Causou " + Integer.toString(d);
+			} else {
+				log = "Voce Causou " + Integer.toString(d);
+			}
+
 			System.out.println("Chegou ate atualizaBattleInfo e entrou em i");
-			
+
 			setLog(log);
-			
+
 		}
 	}
 
@@ -204,20 +213,20 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		Last_Hope.midPanel.add(battleInfo, 550, 50);
 	}
-	
-	public static void sairBattle(){
+
+	public static void sairBattle() {
 		Last_Hope.midPanel.add(sair, 850, 550);
-		
+
 	}
-	
-	public static void setLog(String log){
+
+	public static void setLog(String log) {
 		String l;
 		l = logBattle.getText();
 		logBattle.setReadOnly(false);
-		logBattle.setText(l+log+"\n");
+		logBattle.setText(l + log + "\n");
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
 	}
-	
+
 }

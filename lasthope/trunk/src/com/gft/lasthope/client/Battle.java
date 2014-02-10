@@ -19,6 +19,7 @@ public class Battle {
 	public static void ataqueFisico(Creature a, Creature d) {
 		int dano;
 		int numRolado = Dices.rolarD20(1);
+		boolean crit=false;
 		String log = "";
 		System.out.println(numRolado);
 
@@ -27,21 +28,17 @@ public class Battle {
 				dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
 						a.getStrength()))
 						* a.getWeapon().getCriticalMultiplier();
+				crit=true;
 			} else {
 				dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
 						a.getDexterity()))
 						* a.getWeapon().getCriticalMultiplier();
+				crit=true;
 			}
 			dano = dano - d.getResist();
+			BatalhaPanel.atualizaBattleInfo(dano, d, crit);
 
-			BatalhaPanel.atualizaBattleInfo(dano, d);
-
-			// if (a instanceof Character) {
-			// System.out.println("You dealt: " + dano);
-			// } else {
-			// System.out.println("The enemy dealt: " + dano);
-			// }
-			// d.setHp(d.getHp() - dano);
+			d.setHp(d.getHp() - dano);
 
 		} else if (numRolado >= d.getDefense()) {
 			if ("Physical".equals(a.getWeapon().getTipo())) {
@@ -52,25 +49,20 @@ public class Battle {
 						a.getDexterity());
 			}
 			dano = dano - d.getResist();
-			BatalhaPanel.atualizaBattleInfo(dano, d);
+			BatalhaPanel.atualizaBattleInfo(dano, d, crit);
 
-			// if (a instanceof Character) {
-			// System.out.println("Voce causou: " + dano);
-			//
-			// } else {
-			// System.out.println("O inimigo causou: " + dano);
-			// BatalhaPanel.atualizaBattleInfo(dano,d);
-			// }
 			d.setHp(d.getHp() - dano);
 
 		} else {
-			// System.out.println("Loser, you missed");
+			if (a instanceof Character) {
+				BatalhaPanel.setLog("Voce errou!");
+			} else {
+				BatalhaPanel.setLog("Inimigo Errou");
+			}
 		}
 
-		// System.out.println(d.getName() + " is with " + d.getHp() + " HP.");
 		a.setControladorTempo(a.getControladorTempo() + a.getSpeed());
 
-		// return log;
 	}
 
 	public static Creature calculaVelocidade(Character p, Enemy i) {
@@ -83,31 +75,47 @@ public class Battle {
 
 	public static void aBatalhaQueVaiGirando(Character p, Enemy i) {
 
-		do {
-			Creature c = calculaVelocidade(p, i);
-			if (c instanceof Character) {
-				ataqueFisico(p, i);
+		Creature c = calculaVelocidade(p, i);
 
-			} else {
+		if (c instanceof Character) {
+			ataqueFisico(p, i);
+
+			while (i.getControladorTempo() < p.getControladorTempo()) {
+				if (i.getHp() <= 0 || p.getHp() <= 0) {
+					break;
+				}
 				ataqueFisico(i, p);
 			}
-		} while (i.getControladorTempo() < p.getControladorTempo());
+
+		} else {
+			ataqueFisico(i, p);
+
+			while (p.getControladorTempo() < i.getControladorTempo()) {
+				if (i.getHp() <= 0 || p.getHp() <= 0) {
+					break;
+				}
+				ataqueFisico(p, i);
+			}
+		}
 
 		if (isWinner(p, i) instanceof Character) {
 			p.ganharBatalha(p, i.getExp());
 			BatalhaPanel.setLog("Voce ganhou " + Long.toString(i.getExp())
 					+ " de EXP");
+			BatalhaPanel.atacar.setEnabled(false);
 		} else if (isWinner(p, i) instanceof Enemy) {
 			p.morrer();
 			BatalhaPanel.setLog("Voce Morreu");
+			BatalhaPanel.atacar.setEnabled(false);
 		}
+
 	}
 
 	public static Creature isWinner(Character p, Enemy i) {
 
-		if (p.getHp() > 0 && i.getHp() < 0) {
+		if (i.getHp() <= 0) {
 			return p;
-		} else if (p.getHp() < 0 && i.getHp() > 0) {
+		} else if (p.getHp() <= 0) {
 			return i;
 		} else {
 			return null;
