@@ -45,8 +45,15 @@ public class BatalhaPanel extends AbsolutePanel {
 	public BatalhaPanel() {
 		
 		it.updateWeapons();
-		p.setWeapon((Weapon) it.listWeapons.get(2));
 		
+		p.setName("PersonagemT");
+		i.setName("Goblin");
+		
+		p.setControladorTempo(1);
+		i.setControladorTempo(1);
+		
+		p.setWeapon((Weapon) it.listWeapons.get(2));
+		i.setWeapon((Weapon) it.listWeapons.get(2));
 		
 		logBattle();
 		actionsPanel();
@@ -57,22 +64,8 @@ public class BatalhaPanel extends AbsolutePanel {
 
 	private void battleAttack() {
 
-		Battle.aBatalhaQueVaiGirando(p,i);
-		
-//		String l;
-//		
-//		l = logBattle.getText();
-//		logBattle.setReadOnly(false);
-//
-//		logBattle.setText(l + "Ataque\n");
-//
-//		logBattle.getElement().setScrollTop(
-//				logBattle.getElement().getScrollHeight());
-//		logBattle.setReadOnly(true);
-//
-//		dmg = 1;
-//
-//		// atualizaBattleInfo(dmg);
+		Battle.aBatalhaQueVaiGirando(p, i);
+
 	}
 
 	private void battleDefend() {
@@ -94,29 +87,31 @@ public class BatalhaPanel extends AbsolutePanel {
 
 	static void atualizaBattleInfo(int d, Creature c) {
 		int i;
-		String l;
+		String log;
 		
 		if (c instanceof Character) {
-			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
-			hpAtualInimigo.setText(Integer.toString(i));
 			
-			l = logBattle.getText();
-			logBattle.setReadOnly(false);
-			logBattle.setText(l + "Voce causou "+d+" de dano\n");
-			logBattle.getElement().setScrollTop(
-					logBattle.getElement().getScrollHeight());
-			logBattle.setReadOnly(true);
-
-		} else {
 			i = Integer.valueOf(hpAtualPerso.getText()) - d;
 			hpAtualPerso.setText(Integer.toString(i));
 			
-			l = logBattle.getText();
-			logBattle.setReadOnly(false);
-			logBattle.setText(l + "O "+c.getName()+" causou "+d+" de dano\n");
-			logBattle.getElement().setScrollTop(
-					logBattle.getElement().getScrollHeight());
-			logBattle.setReadOnly(true);
+			log="Inimigo causou "+Integer.toString(d);
+			
+			setLog(log);
+			
+			System.out.println("Chegou ate atualizaBattleInfo e entrou em c");
+			
+
+		} else {
+			
+			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
+			hpAtualInimigo.setText(Integer.toString(i));
+			
+			log="Voce Causou "+Integer.toString(d);
+			
+			System.out.println("Chegou ate atualizaBattleInfo e entrou em i");
+			
+			setLog(log);
+			
 		}
 	}
 
@@ -173,8 +168,8 @@ public class BatalhaPanel extends AbsolutePanel {
 		inimigo.setSize("293px", "220px");
 		perso.setSize("293px", "220px");
 
-		nomeInimigo.setText(p.getName());
-		nomePerso.setText(i.getName());
+		nomeInimigo.setText(i.getName());
+		nomePerso.setText(p.getName());
 
 		// hpMaxInimigo.setText(Integer.toString(hpInimigo));
 		// hpMaxPerso.setText(Integer.toString(hpPerso));
@@ -215,8 +210,14 @@ public class BatalhaPanel extends AbsolutePanel {
 		
 	}
 	
-	public static void setLog(){
-		
+	public static void setLog(String log){
+		String l;
+		l = logBattle.getText();
+		logBattle.setReadOnly(false);
+		logBattle.setText(l+log+"\n");
+		logBattle.getElement().setScrollTop(
+				logBattle.getElement().getScrollHeight());
+		logBattle.setReadOnly(true);
 	}
 	
 }
