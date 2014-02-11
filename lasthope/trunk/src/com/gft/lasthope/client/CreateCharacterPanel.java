@@ -30,6 +30,7 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	Label tituloA = new Label();
 	Label tituloB = new Label();
 	Label name = new Label();
+	Label classl = new Label();
 	
 	TextBox nameT = new TextBox();
 
@@ -47,10 +48,12 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		listClass.setStyleName("textInsideChar");
 		name.setStyleName("textInsideChar");
 		nameT.setStyleName("textInsideChar");
-		
+		classl.setStyleName("textInsideChar");
 		
 		name.setText("Name");
-		nameT.setSize("25px", "100px");
+		nameT.setSize("150px", "20px");
+		
+		classl.setText("Class");
 
 		a.setSize("350px", "350px");
 		b.setSize("350px", "350px");
@@ -73,13 +76,16 @@ public class CreateCharacterPanel extends AbsolutePanel {
 			public void onChange(ChangeEvent event) {
 				changeClass("Human",
 						listClass.getItemText(listClass.getSelectedIndex()));
-
+				
 			}
 
 		});
-
-		a.add(name,10,50);
-		a.add(nameT,35,50);
+		
+		a.add(name,10,90);
+		a.add(nameT,50,90);
+		
+		a.add(classl,10,130);
+		a.add(listClass,50,130);
 
 		Last_Hope.midPanel.add(a, 10, 10);
 		Last_Hope.midPanel.add(b, 370, 10);
@@ -89,36 +95,60 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		switch (classe) {
 		case "Warrior":
 			b.clear();
+			
 			c.criaPersonagem("Human", "Warrior");
-			b.add(wImage);
+			b.add(wImage,110,40);
+			
+			strL.setText("Strength: " + c.getStrength());
+			dexL.setText("Dextrity: " + c.getDexterity());
+			intL.setText("Intelect: " + c.getIntellect());
+			chaL.setText("Charisma: " + c.getCharisma());
+			
 			break;
 		case "Mage":
 			b.clear();
+			
 			c.criaPersonagem("Human", "Mage");
-			b.add(mImage);
+			b.add(mImage,110,40);
+			
+			strL.setText("Strength: " + c.getStrength());
+			dexL.setText("Dextrity: " + c.getDexterity());
+			intL.setText("Intelect: " + c.getIntellect());
+			chaL.setText("Charisma: " + c.getCharisma());
+			
 			break;
 		case "Archer":
 			b.clear();
+			
 			c.criaPersonagem("Human", "Archer");
-			b.add(aImage);
+			b.add(aImage,110,40);
+			
+			strL.setText("Strength: " + c.getStrength());
+			dexL.setText("Dextrity: " + c.getDexterity());
+			intL.setText("Intelect: " + c.getIntellect());
+			chaL.setText("Charisma: " + c.getCharisma());
+			
 			break;
 		case "Rogue":
 			b.clear();
+			
 			c.criaPersonagem("Human", "Rogue");
-			b.add(rImage);
+			b.add(rImage,110,40);
+			
+			strL.setText("Strength: " + c.getStrength());
+			dexL.setText("Dextrity: " + c.getDexterity());
+			intL.setText("Intelect: " + c.getIntellect());
+			chaL.setText("Charisma: " + c.getCharisma());
+
 			break;
 		}
-
-		strL.setText("Strength: " + c.getStrength());
-		dexL.setText("Dextrity: " + c.getDexterity());
-		intL.setText("Intelect: " + c.getIntellect());
-		chaL.setText("Charisma: " + c.getCharisma());
-
-		stats.add(strL);
-		stats.add(dexL);
-		stats.add(intL);
-		stats.add(chaL);
-
+		
+		stats.add(strL,10,200);
+		stats.add(dexL,10,220);
+		stats.add(intL,10,240);
+		stats.add(chaL,10,260);
+		
+		b.add(tituloB);
 		b.add(stats);
 	}
 
