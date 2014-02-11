@@ -31,6 +31,7 @@ public class BatalhaPanel extends AbsolutePanel {
 	Label hpP = new Label("HP");
 	static Button sair = new BotaoSair();
 	static Button atacar = new Button();
+	Button btnLimpaLog = new Button();
 	Button defender = new Button();
 	int hpInimigo = 20;
 	int hpPerso = 20;
@@ -128,8 +129,19 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		logBattle.setTitle("LOG");
 		logBattle.setSize("250px", "500px");
+
+		btnLimpaLog.setText("Limpar Log");
+		btnLimpaLog.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				limpaLog();
+
+			}
+
+		});
 		Last_Hope.midPanel.add(new HTML("Log de Batalha"), 10, 0);
 		Last_Hope.midPanel.add(logBattle, 10, 30);
+		Last_Hope.midPanel.add(btnLimpaLog, 187, 550);
+
 	}
 
 	private void actionsPanel() {
@@ -167,7 +179,7 @@ public class BatalhaPanel extends AbsolutePanel {
 		// informacoes de batalha
 		battleInfo.setStyleName("battleInfo");
 		battleInfo.add(new HTML("Informacoes de batalha"));
-		battleInfo.setSize("300px", "500px");
+		battleInfo.setSize("300px", "490px");
 
 		// dentro das informacoes de batalha, vai as informacoes do inimigo e do
 		// personagem
@@ -215,7 +227,7 @@ public class BatalhaPanel extends AbsolutePanel {
 	}
 
 	public static void sairBattle() {
-		Last_Hope.midPanel.add(sair, 850, 550);
+		Last_Hope.midPanel.add(sair, 855, 555);
 
 	}
 
@@ -227,6 +239,14 @@ public class BatalhaPanel extends AbsolutePanel {
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
 		logBattle.setReadOnly(true);
+	}
+
+	private void limpaLog() {
+		if (Window.confirm("Tem certeza que deseja limpar a janela de LOG?")) {
+			logBattle.setText("");
+
+		}
+
 	}
 
 }
