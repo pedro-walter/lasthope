@@ -44,16 +44,17 @@ public class Character extends Creature {
         }
     }
 
-    public Character criaPersonagem() {
+    public Character criaPersonagem(String race, String classe) {
         Character p = new Character();
-        p.setRace(escolheRaca(p));
-        p.setProfession(escolheClasse());
+        p.setRace(escolheRaca(p, race));
+        p.setProfession(escolheClasse(classe));
 
         return p;
     }
 
-    public String escolheClasse() {
-        String classe="Warrior";
+    public String escolheClasse(String classe) {
+        //default
+    	//String classe="Warrior";
         switch (classe) {
             case "Warrior":
                 atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, this.getSpeed() - 0.1);
@@ -75,9 +76,9 @@ public class Character extends Creature {
         return classe;
     }
 
-    public String escolheRaca(Character p) {
-        String raca="Human";
-        switch (raca) {
+    public String escolheRaca(Character p, String race) {
+        //String raca="Human";
+        switch (race) {
             case "Human":
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
                 break;
@@ -91,11 +92,11 @@ public class Character extends Creature {
                 atualizaPersonagem(0, 2, 0, 0, 5, 5, 0.9);
                 break;
             default:
-                raca = "Human";
+                race = "Human";
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
                 break;
         }
-        return raca;
+        return race;
     }
 
     public void atualizaPersonagem(int forca, int dext, int inte, int caris, int hpMax, int mpMax, double velocidade) {
