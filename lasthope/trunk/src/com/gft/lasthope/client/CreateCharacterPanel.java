@@ -26,12 +26,12 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	Image aImage = new Image(r.ranger());
 	Image rImage = new Image(r.rogue());
 	Image mImage = new Image(r.mage());
-	
+
 	Label tituloA = new Label();
 	Label tituloB = new Label();
 	Label name = new Label();
-	Label classl = new Label();
-	
+	Label classL = new Label();
+
 	TextBox nameT = new TextBox();
 
 	public CreateCharacterPanel() {
@@ -48,108 +48,106 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		listClass.setStyleName("textInsideChar");
 		name.setStyleName("textInsideChar");
 		nameT.setStyleName("textInsideChar");
-		classl.setStyleName("textInsideChar");
-		
+		classL.setStyleName("textInsideChar");
+
 		name.setText("Name");
 		nameT.setSize("150px", "20px");
-		
-		classl.setText("Class");
+
+		classL.setText("Class");
 
 		a.setSize("350px", "350px");
 		b.setSize("350px", "350px");
-		
-		
+
 		tituloA.setText("Create new Character");
 		tituloB.setText("Stats of the Character");
-		
+
 		a.add(tituloA);
 		b.add(tituloB);
 
+		listClass.addItem("---");
 		listClass.addItem("Warrior");
 		listClass.addItem("Mage");
 		listClass.addItem("Archer");
 		listClass.addItem("Rogue");
-		
-		changeClass("Human", listClass.getItemText(0));
+
+		stats.add(strL, 10, 200);
+		stats.add(dexL, 10, 220);
+		stats.add(intL, 10, 240);
+		stats.add(chaL, 10, 260);
+
+		b.add(stats);
 
 		listClass.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				changeClass("Human",
 						listClass.getItemText(listClass.getSelectedIndex()));
-				
+
 			}
 
 		});
-		
-		a.add(name,10,90);
-		a.add(nameT,50,90);
-		
-		a.add(classl,10,130);
-		a.add(listClass,50,130);
+
+		a.add(name, 10, 90);
+		a.add(nameT, 50, 90);
+
+		a.add(classL, 10, 130);
+		a.add(listClass, 50, 130);
 
 		Last_Hope.midPanel.add(a, 10, 10);
 		Last_Hope.midPanel.add(b, 370, 10);
+
 	}
 
 	private void changeClass(String race, String classe) {
+		b.clear();
 		switch (classe) {
 		case "Warrior":
-			b.clear();
-			
 			c.criaPersonagem("Human", "Warrior");
-			b.add(wImage,110,40);
-			
-			strL.setText("Strength: " + c.getStrength());
-			dexL.setText("Dextrity: " + c.getDexterity());
-			intL.setText("Intelect: " + c.getIntellect());
-			chaL.setText("Charisma: " + c.getCharisma());
-			
+			b.add(wImage, 110, 40);
 			break;
-		case "Mage":
-			b.clear();
-			
-			c.criaPersonagem("Human", "Mage");
-			b.add(mImage,110,40);
-			
-			strL.setText("Strength: " + c.getStrength());
-			dexL.setText("Dextrity: " + c.getDexterity());
-			intL.setText("Intelect: " + c.getIntellect());
-			chaL.setText("Charisma: " + c.getCharisma());
-			
-			break;
-		case "Archer":
-			b.clear();
-			
-			c.criaPersonagem("Human", "Archer");
-			b.add(aImage,110,40);
-			
-			strL.setText("Strength: " + c.getStrength());
-			dexL.setText("Dextrity: " + c.getDexterity());
-			intL.setText("Intelect: " + c.getIntellect());
-			chaL.setText("Charisma: " + c.getCharisma());
-			
-			break;
-		case "Rogue":
-			b.clear();
-			
-			c.criaPersonagem("Human", "Rogue");
-			b.add(rImage,110,40);
-			
-			strL.setText("Strength: " + c.getStrength());
-			dexL.setText("Dextrity: " + c.getDexterity());
-			intL.setText("Intelect: " + c.getIntellect());
-			chaL.setText("Charisma: " + c.getCharisma());
 
+		case "Mage":
+			c.criaPersonagem("Human", "Mage");
+			b.add(mImage, 110, 40);
 			break;
+
+		case "Archer":
+			c.criaPersonagem("Human", "Archer");
+			b.add(aImage, 110, 40);
+			break;
+
+		case "Rogue":
+			c.criaPersonagem("Human", "Rogue");
+			b.add(rImage, 110, 40);
+			break;
+
+		default:
+			b.clear();
+			stats.clear();
+			b.add(tituloB);
+			break;
+
 		}
-		
-		stats.add(strL,10,200);
-		stats.add(dexL,10,220);
-		stats.add(intL,10,240);
-		stats.add(chaL,10,260);
-		
+
+		// criar metodo para popular o stats e a imagem
+		// pois assim esta ficando em branco apos o primeiro click em ---
+
+		System.out.println("Isso deveria acontecer");
+
+		strL.setText("Strength: " + c.getStrength());
+		dexL.setText("Dextrity: " + c.getDexterity());
+		intL.setText("Intelect: " + c.getIntellect());
+		chaL.setText("Charisma: " + c.getCharisma());
+
+		System.out.println(strL);
+		System.out.println(dexL);
+		System.out.println(intL);
+		System.out.println(chaL);
+
+		System.out.println(stats);
+
 		b.add(tituloB);
 		b.add(stats);
+
 	}
 
 }
