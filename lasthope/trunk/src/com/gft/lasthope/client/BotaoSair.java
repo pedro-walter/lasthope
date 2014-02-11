@@ -6,12 +6,12 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 
 public class BotaoSair extends Button {
-	
+
 	public BotaoSair(){
-		this.setText("Sair");
+		this.setText("Quit");
 		this.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				if(Window.confirm("Deseja Realmente Sair?")){
+				if(Window.confirm("You really want to leave?")){
 					Last_Hope.midPanel.clear();
 					Menus.habilitaMenu();
 				}

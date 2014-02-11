@@ -47,7 +47,7 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		it.updateWeapons();
 
-		p.setName("PersonagemT");
+		p.setName("Character");
 		i.setName("Goblin");
 
 		p.setHp(30);
@@ -78,7 +78,7 @@ public class BatalhaPanel extends AbsolutePanel {
 		l = logBattle.getText();
 		logBattle.setReadOnly(false);
 
-		logBattle.setText(l + "Defesa\n");
+		logBattle.setText(l + "Defend\n");
 
 		logBattle.getElement().setScrollTop(
 				logBattle.getElement().getScrollHeight());
@@ -99,9 +99,9 @@ public class BatalhaPanel extends AbsolutePanel {
 			hpAtualPerso.setText(Integer.toString(i));
 
 			if (crit) {
-				log = "Ataque Critico! Inimigo causou " + Integer.toString(d);
+				log = "Critical Strike! The enemy dealt " + Integer.toString(d) + " damage!";
 			} else {
-				log = "Inimigo causou " + Integer.toString(d);
+				log = "The enemy dealt " + Integer.toString(d) + " damage!";
 			}
 			setLog(log);
 
@@ -113,9 +113,9 @@ public class BatalhaPanel extends AbsolutePanel {
 			hpAtualInimigo.setText(Integer.toString(i));
 
 			if (crit) {
-				log = "Ataque Critico! Voce Causou " + Integer.toString(d);
+				log = "Critical strike! You dealt " + Integer.toString(d) + " damage!";
 			} else {
-				log = "Voce Causou " + Integer.toString(d);
+				log = "You dealt " + Integer.toString(d) + " damage!";
 			}
 
 			System.out.println("Chegou ate atualizaBattleInfo e entrou em i");
@@ -130,7 +130,7 @@ public class BatalhaPanel extends AbsolutePanel {
 		logBattle.setTitle("LOG");
 		logBattle.setSize("250px", "500px");
 
-		btnLimpaLog.setText("Limpar Log");
+		btnLimpaLog.setText("Clean Log");
 		btnLimpaLog.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				limpaLog();
@@ -138,7 +138,7 @@ public class BatalhaPanel extends AbsolutePanel {
 			}
 
 		});
-		Last_Hope.midPanel.add(new HTML("Log de Batalha"), 10, 0);
+		Last_Hope.midPanel.add(new HTML("Battle Log"), 10, 0);
 		Last_Hope.midPanel.add(logBattle, 10, 30);
 		Last_Hope.midPanel.add(btnLimpaLog, 187, 550);
 
@@ -147,7 +147,7 @@ public class BatalhaPanel extends AbsolutePanel {
 	private void actionsPanel() {
 
 		// botao para atacar
-		atacar.setText("Atacar!");
+		atacar.setText("Atack!");
 		atacar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				battleAttack();
@@ -166,7 +166,7 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		// painel de acoes
 		actions.setStyleName("battle");
-		actions.add(new HTML("Painel de acoes"), 10, 10);
+		actions.add(new HTML("Action panel"), 10, 10);
 		actions.setSize("200px", "300px");
 		actions.add(atacar, 10, 40);
 		// actions.add(defender, 10, 80);
@@ -178,7 +178,7 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		// informacoes de batalha
 		battleInfo.setStyleName("battleInfo");
-		battleInfo.add(new HTML("Informacoes de batalha"));
+		battleInfo.add(new HTML("Battle Info"));
 		battleInfo.setSize("300px", "490px");
 
 		// dentro das informacoes de batalha, vai as informacoes do inimigo e do
@@ -242,7 +242,7 @@ public class BatalhaPanel extends AbsolutePanel {
 	}
 
 	private void limpaLog() {
-		if (Window.confirm("Tem certeza que deseja limpar a janela de LOG?")) {
+		if (Window.confirm("You really want to clean the LOG?")) {
 			logBattle.setText("");
 
 		}

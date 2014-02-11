@@ -34,9 +34,10 @@ public class Character extends Creature {
         setExp(getExp() - xpLostLong);
     }
 
-    public void ganharBatalha(Character p, long xpMonstro) {
+    public void ganharBatalha(Character p, long xpMonstro, int gold) {
         System.out.println("You win the battle!!!");
         p.setExp(p.getExp() + xpMonstro);
+        p.setGold(p.getGold()+gold);
         p.setHp(p.getHpMax());
         if (p.getExp() >= p.getLevel() * 100) {
             evoluir(p);
@@ -46,12 +47,12 @@ public class Character extends Creature {
     public Character criaPersonagem() {
         Character p = new Character();
         p.setRace(escolheRaca(p));
-        p.setProfession(escolheClasse(p));
+        p.setProfession(escolheClasse());
 
         return p;
     }
 
-    public String escolheClasse(Character p) {
+    public String escolheClasse() {
         String classe="Warrior";
         switch (classe) {
             case "Warrior":
@@ -62,6 +63,9 @@ public class Character extends Creature {
                 break;
             case "Mage":
                 atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, this.getSpeed());
+                break;
+            case "Rogue":
+                atualizaPersonagem(this.getStrength() + 2, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 15, this.getMpMax() + 15, this.getSpeed() - 0.25);
                 break;
             default:
                 classe = "Warrior";
@@ -83,9 +87,12 @@ public class Character extends Creature {
             case "Dwarf":
                 atualizaPersonagem(2, 0, 0, 0, 15, 5, 1);
                 break;
+            case "Halfling":
+                atualizaPersonagem(0, 2, 0, 0, 5, 5, 0.9);
+                break;
             default:
                 raca = "Human";
-                atualizaPersonagem(p.getStrength() + 1, p.getDexterity() + 1, p.getIntellect() + 1, p.getCharisma() + 1, p.getHpMax(), p.getMpMax(), p.getSpeed());
+                atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
                 break;
         }
         return raca;
