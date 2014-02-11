@@ -55,3 +55,14 @@ h1 {
 	text-align: left;
 	padding: 3px;
 }
+
+.titleChar {
+	text-align: center;
+	padding: 3px;
+	font-size: 150%;
+}
+
+.textInsideChar {
+	text-align: left;
+	padding: 1px;
+}
