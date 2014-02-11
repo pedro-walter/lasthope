@@ -12,7 +12,7 @@ public class Menus {
 	static Button batalha = new Button();
 	static Button loja = new Button();
 	static Button quest = new Button();
-	//static Button teste = new Button();
+	static Button teste = new Button();
 	static Button inventario = new Button();
 	
 	
@@ -59,12 +59,23 @@ public class Menus {
 			}
 
 		});
+		
+		//teste
+		teste.setText("Teste");
+		teste.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				testeMid();
+				//desabilitaMenu();
+			}
+
+		});
 
 		// add`s
 		auxV.add(batalha);
 		auxV.add(loja);
 		auxV.add(quest);
 		auxV.add(inventario);
+		auxV.add(teste);
 
 		return auxV;
 	}
@@ -93,6 +104,11 @@ public class Menus {
 		Last_Hope.midPanel.add(new HTML("1 - descer a lenha nos goblin"));
 		Last_Hope.midPanel.add(new HTML("2 - ajudar a veia a atravesar a rua"));
 		
+	}
+	
+	private void testeMid(){
+		Last_Hope.midPanel.clear();
+		Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
 	
