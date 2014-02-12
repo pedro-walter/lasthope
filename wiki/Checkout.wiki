@@ -1,0 +1,36 @@
+#summary Intruções de como baixar o projeto no Eclipse.
+
+= Instruções =
+
+Execute os seguintes passos no Eclipse:
+
+= Instalando o Subversive =
+
+  # Vá em Help -> Install New Software. 
+  # No campo "Work with:", escolha o repositório da sua versáo do Eclipse (Kepler, Galileo, etc). É uma URL do tipo "http://download.eclipse.org/releases/<versao>".
+  # Depois que aparecerem as opções de software disponível, procure o Subversive dentro do item "Collaboration", ou vá no campo de busca e digite "svn".
+  # Marque "Subversive SVN Team Provider"
+  # Vá clicando em next, finish, etc. O Eclipse será reiniciado.
+
+= Instalando o Conector =
+
+Normalmente, quando depois que reiniciar o Eclipse, aparece uma tela para escolher qual o conector SVN que será usado com o Subversive. Caso isso não aconteça, siga os passos a seguir:
+
+  # Vá em Help -> Install New Software. 
+  # No campo "Work with:", escolha o repositório "http://community.polarion.com/projects/subversive/download/eclipse/3.0/kepler-site/". Se ele não existir, basta digitar ele no campo "Work With".
+  # Dentro de "Subversive SVN Connectors", escolha um conector adequado a sua plataforma. No windows eu recomento o JavaHL Binaries, de 32-bits ou 64-bits (dependendo de qual versão do ECLIPSE estiver em uso, na dúvida veja em Help -> About Eclipse).
+  # Vá clicando em next, finish, etc. O Eclipse será reiniciado.
+
+= Adicionando o projeto ao seu workspace =
+
+  # Vá em File -> New -> Other
+  # Escolha SVN -> Project from SVN
+  # Caso seja seu primeiro projeto SVN, pule para a próxima etapa, senão, escolha "Create a new repository location".
+  # No formulário "Enter Repository Location Information", no campo URL digite "https://lasthope.googlecode.com/svn". Em Authentication, insira seu e-mail e na senha, insira sua senha do Google Code (<url>).
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
