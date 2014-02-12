@@ -1,5 +1,6 @@
 package com.gft.lasthope.client;
 
+import com.gft.lasthope.shared.Dices;
 import com.gft.lasthope.shared.Enemy;
 import com.gft.lasthope.shared.Character;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -64,8 +65,9 @@ public class Menus {
 		teste.setText("Teste");
 		teste.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				testeMid();
+				//testeMid();
 				//desabilitaMenu();
+				//Dices.rollDice(4,1);
 			}
 
 		});
@@ -108,7 +110,9 @@ public class Menus {
 	
 	private void testeMid(){
 		Last_Hope.midPanel.clear();
-		Last_Hope.midPanel.add(new CreateCharacterPanel());
+		
+		
+		//Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
 	

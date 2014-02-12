@@ -70,11 +70,6 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		listClass.addItem("Archer");
 		listClass.addItem("Rogue");
 
-		stats.add(strL, 10, 200);
-		stats.add(dexL, 10, 220);
-		stats.add(intL, 10, 240);
-		stats.add(chaL, 10, 260);
-
 		b.add(stats);
 
 		listClass.addChangeHandler(new ChangeHandler() {
@@ -100,47 +95,48 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	private void changeClass(String race, String classe) {
 		b.clear();
 		if (classe.equals("Warrior")){
-			c.criaPersonagem("Human", "Warrior");
-			b.add(wImage, 110, 40);
+			populateStats("Human", "Warrior", wImage);
 		}
 		else if (classe.equals("Mage")){
-			c.criaPersonagem("Human", "Mage");
-			b.add(mImage, 110, 40);
+			populateStats("Human", "Mage", mImage);
 		}
 		else if (classe.equals("Archer")){
-			c.criaPersonagem("Human", "Archer");
-			b.add(aImage, 110, 40);
+			populateStats("Human", "Archer", aImage);
 		}
 		else if (classe.equals("Rogue")){
-			c.criaPersonagem("Human", "Rogue");
-			b.add(rImage, 110, 40);
+			populateStats("Human", "Rogue", rImage);
 		}
 		else {
-			b.clear();
-			stats.clear();
-			b.add(tituloB);
+			populateStatsEmpty();
 		}
-
-		// criar metodo para popular o stats e a imagem
-		// pois assim esta ficando em branco apos o primeiro click em ---
-
-		System.out.println("Isso deveria acontecer");
-
-		strL.setText("Strength: " + c.getStrength());
-		dexL.setText("Dextrity: " + c.getDexterity());
-		intL.setText("Intelect: " + c.getIntellect());
-		chaL.setText("Charisma: " + c.getCharisma());
-
-		System.out.println(strL);
-		System.out.println(dexL);
-		System.out.println(intL);
-		System.out.println(chaL);
-
-		System.out.println(stats);
 
 		b.add(tituloB);
 		b.add(stats);
 
+	}
+
+	private void populateStats(String race, String classe, Image i) {
+
+		b.add(tituloB);
+		c.criaPersonagem(race, classe);
+		b.add(i, 110, 40);
+		
+		strL.setText("Strength: " + c.getStrength());
+		dexL.setText("Dextrity: " + c.getDexterity());
+		intL.setText("Intelect: " + c.getIntellect());
+		chaL.setText("Charisma: " + c.getCharisma());
+		
+		stats.add(strL, 10, 200);
+		stats.add(dexL, 10, 220);
+		stats.add(intL, 10, 240);
+		stats.add(chaL, 10, 260);
+		
+	}
+
+	private void populateStatsEmpty() {
+		b.clear();
+		stats.clear();
+		b.add(tituloB);
 	}
 
 }
