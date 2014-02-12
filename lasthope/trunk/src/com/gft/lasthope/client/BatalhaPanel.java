@@ -72,22 +72,22 @@ public class BatalhaPanel extends AbsolutePanel {
 
 	}
 
-	private void battleDefend() {
-		String l;
-
-		l = logBattle.getText();
-		logBattle.setReadOnly(false);
-
-		logBattle.setText(l + "Defend\n");
-
-		logBattle.getElement().setScrollTop(
-				logBattle.getElement().getScrollHeight());
-		logBattle.setReadOnly(true);
-
-		dmg = 0;
-
-		// atualizaBattleInfo(dmg);
-	}
+//	private void battleDefend() {
+//		String l;
+//
+//		l = logBattle.getText();
+//		logBattle.setReadOnly(false);
+//
+//		logBattle.setText(l + "Defend\n");
+//
+//		logBattle.getElement().setScrollTop(
+//				logBattle.getElement().getScrollHeight());
+//		logBattle.setReadOnly(true);
+//
+//		dmg = 0;
+//
+//		// atualizaBattleInfo(dmg);
+//	}
 
 	static void atualizaBattleInfo(int d, Creature c, boolean crit) {
 		int i;

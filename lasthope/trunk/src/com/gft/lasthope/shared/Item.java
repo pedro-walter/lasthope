@@ -20,16 +20,17 @@ public class Item {
     public HashMap<Integer, Shield> listShields = new HashMap<Integer, Shield>();
     public HashMap<Integer, Helmet> listHelmets = new HashMap<Integer, Helmet>();
     public HashMap<Integer, Boot> listBoots = new HashMap<Integer, Boot>();
+
     private int id;
     private String nome;
     private double price;
 
     public void updateWeapons() {
 
-        Weapon am = new Weapon(1,1,2,1,"Dagger","Physical");
+        Weapon am = new Weapon(1,1,4,2,1,"Dagger","Physical");
         listWeapons.put(1, am);
 
-        am = new Weapon(2,2,2,2,"Sword","Physical");
+        am = new Weapon(2,1,6,2,2,"Sword","Physical");
         listWeapons.put(2, am);
 
     }
@@ -106,5 +107,5 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 }

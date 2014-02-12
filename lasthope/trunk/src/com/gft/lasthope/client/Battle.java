@@ -20,19 +20,14 @@ public class Battle {
 		int dano;
 		int numRolado = Dices.rolarD20(1);
 		boolean crit=false;
-		String log = "";
 		System.out.println(numRolado);
 
 		if (numRolado >= (21 - a.getWeapon().getCriticalRate())) {
 			if ("Physical".equals(a.getWeapon().getTipo())) {
-				dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
-						a.getStrength()))
-						* a.getWeapon().getCriticalMultiplier();
+				dano = (a.getWeapon().calculaDano(a.getStrength(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
 				crit=true;
 			} else {
-				dano = (a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
-						a.getDexterity()))
-						* a.getWeapon().getCriticalMultiplier();
+				dano = (a.getWeapon().calculaDano(a.getDexterity(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
 				crit=true;
 			}
 			dano = dano - d.getResist();
@@ -42,11 +37,9 @@ public class Battle {
 
 		} else if (numRolado >= d.getDefense()) {
 			if ("Physical".equals(a.getWeapon().getTipo())) {
-				dano = a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
-						a.getStrength());
+				dano = a.getWeapon().calculaDano(a.getStrength(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
 			} else {
-				dano = a.getWeapon().calculaDano(a.getWeapon().getDadoArma(),
-						a.getDexterity());
+				dano = a.getWeapon().calculaDano(a.getDexterity(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
 			}
 			dano = dano - d.getResist();
 			BatalhaPanel.atualizaBattleInfo(dano, d, crit);

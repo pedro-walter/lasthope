@@ -6,7 +6,6 @@ package com.gft.lasthope.shared;
  * and open the template in the editor.
  */
 
-import java.util.List;
 
 /**
  *
@@ -39,8 +38,8 @@ public class Creature {
     private Shield shield;
 	private int resist=0;
     //private List bolsa;
-    private List feats; //ainda nao
-    private List spells; //ainda nao
+  //  private List feats; //ainda nao
+ //   private List spells; //ainda nao
     private double controladorTempo=speed;
 
     public double getControladorTempo() {
@@ -158,21 +157,21 @@ public class Creature {
 		this.resist = resist;
 	}
 
-	public List getFeats() {
-		return feats;
-	}
-
-	public void setFeats(List feats) {
-		this.feats = feats;
-	}
-
-	public List getSpells() {
-		return spells;
-	}
-
-	public void setSpells(List spells) {
-		this.spells = spells;
-	}
+//	public List getFeats() {
+//		return feats;
+//	}
+//
+//	public void setFeats(List feats) {
+//		this.feats = feats;
+//	}
+//
+//	public List getSpells() {
+//		return spells;
+//	}
+//
+//	public void setSpells(List spells) {
+//		this.spells = spells;
+//	}
 
 	public String getName() {
 		return name;

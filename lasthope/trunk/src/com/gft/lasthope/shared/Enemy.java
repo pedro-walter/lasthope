@@ -1,7 +1,5 @@
 package com.gft.lasthope.shared;
 
-import java.util.List;
-
 public class Enemy extends Creature {
 
 	public Enemy criaInimigo(int idInimigo){

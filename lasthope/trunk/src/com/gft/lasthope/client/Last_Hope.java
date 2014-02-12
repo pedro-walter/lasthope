@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -30,7 +29,7 @@ public class Last_Hope implements EntryPoint {
 	VerticalPanel vWest = new VerticalPanel();
 	AbsolutePanel rootPanel = new AbsolutePanel();
 	Button logout = new Button();
-	
+
 	public void onModuleLoad() {
 		// Check login status using login service.
 		LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -63,13 +62,13 @@ public class Last_Hope implements EntryPoint {
 		//debug
 		//System.out.println("Load 1");
 		Menus west = new Menus();
-		
+
 		//estilos
 		northPanel.setStyleName("header");
 		midPanel.setStyleName("dockPanel");
 		westPanel.setStyleName("dockPanel");
 		botPanel.setStyleName("dockPanel");
-		
+
 		//tamanhos
 		northPanel.setSize("1000px","200px");
 		midPanel.setSize("893px","586px");
@@ -80,18 +79,18 @@ public class Last_Hope implements EntryPoint {
 		//System.out.println("Load 2");
 
 		signOutLink.setHref(loginInfo.getLogoutUrl());
-		
+
 		vWest=west.criaMenuWest();
-		
+
 		//add nos paineis
 		northPanel.add(new HTML("LastHope"));
 		footer.add(signOutLink);
 		botPanel.add(footer);
 		westPanel.add(vWest);
-		
+
 		//debug
 		//System.out.println("Load 3");
-		
+
 		//add os paineis no root
 		rootPanel.add(northPanel, 0, 0);
 		rootPanel.add(botPanel, 0, 800);
