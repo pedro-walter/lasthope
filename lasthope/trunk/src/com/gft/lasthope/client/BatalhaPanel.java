@@ -35,6 +35,20 @@ public class BatalhaPanel extends AbsolutePanel {
 	Label mpMaxInimigo = new Label();
 	static Label mpAtualPerso = new Label();
 	Label mpMaxPerso = new Label();
+	Label strI = new Label();
+	Label dexI = new Label();
+	Label intI = new Label();
+	Label chaI = new Label();
+	Label strP = new Label();
+	Label dexP = new Label();
+	Label intP = new Label();
+	Label chaP = new Label();
+	Label raceI = new Label();
+	Label raceP = new Label();
+	Label classI = new Label();
+	Label classP = new Label();
+	static Label statusI = new Label();
+	static Label statusP = new Label();
 	Label hpI = new Label("HP");
 	Label hpP = new Label("HP");
 	Label mpI = new Label("MP");
@@ -46,8 +60,8 @@ public class BatalhaPanel extends AbsolutePanel {
 	int hpInimigo = 20;
 	int hpPerso = 20;
 
-	Character p = Last_Hope.getCharacter();
-	Enemy i = new Enemy();
+	static Character p = Last_Hope.getCharacter();
+	static Enemy i = new Enemy();
 	Item it = new Item();
 	Weapon w;
 
@@ -58,8 +72,8 @@ public class BatalhaPanel extends AbsolutePanel {
 		// p.setName("Character");
 		i.setName("Goblin");
 
-		// p.setHp(30);
-		// i.setHp(30);
+		p.setHp(300);
+		i.setHp(300);
 
 		// p.setControladorTempo(1);
 		i.setControladorTempo(1);
@@ -80,19 +94,19 @@ public class BatalhaPanel extends AbsolutePanel {
 
 	}
 
-
 	static void atualizaBattleInfo(int d, Creature c, boolean crit) {
-		int i;
+		int in;
 		String log;
 
 		if (c instanceof Character) {
 
-			i = Integer.valueOf(hpAtualPerso.getText()) - d;
-			hpAtualPerso.setText(Integer.toString(i));
+			in = Integer.valueOf(hpAtualPerso.getText()) - d;
+			hpAtualPerso.setText(Integer.toString(in));
 
 			if (crit) {
 				log = "Critical Strike! The enemy dealt " + Integer.toString(d)
 						+ " damage!";
+
 			} else {
 				log = "The enemy dealt " + Integer.toString(d) + " damage!";
 			}
@@ -102,12 +116,13 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		} else {
 
-			i = Integer.valueOf(hpAtualInimigo.getText()) - d;
-			hpAtualInimigo.setText(Integer.toString(i));
+			in = Integer.valueOf(hpAtualInimigo.getText()) - d;
+			hpAtualInimigo.setText(Integer.toString(in));
 
 			if (crit) {
 				log = "Critical strike! You dealt " + Integer.toString(d)
 						+ " damage!";
+				
 			} else {
 				log = "You dealt " + Integer.toString(d) + " damage!";
 			}
@@ -117,6 +132,9 @@ public class BatalhaPanel extends AbsolutePanel {
 			setLog(log);
 
 		}
+
+		statusI.setText("Status: " + i.getStatus());
+		statusP.setText("Status: " + p.getStatus());
 	}
 
 	private void logBattle() {
@@ -149,15 +167,6 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		});
 
-		// // botao para defender
-		// defender.setText("Defender!");
-		// defender.addClickHandler(new ClickHandler() {
-		// public void onClick(ClickEvent event) {
-		// battleDefend();
-		// }
-		//
-		// });
-
 		// painel de acoes
 		actions.setStyleName("battle");
 		actions.add(new HTML("Action panel"), 10, 10);
@@ -186,38 +195,70 @@ public class BatalhaPanel extends AbsolutePanel {
 		nomeInimigo.setText(i.getName());
 		nomePerso.setText(p.getName());
 
-		// hpMaxInimigo.setText(Integer.toString(hpInimigo));
-		// hpMaxPerso.setText(Integer.toString(hpPerso));
+		raceI.setText(i.getRace());
+		raceP.setText(p.getRace());
+
+		classI.setText(i.getProfession());
+		classP.setText(p.getProfession());
+
+		i.setStatus("Normal");
+		p.setStatus("Normal");
+
+		statusI.setText("Status: " + i.getStatus());
+		statusP.setText("Status: " + p.getStatus());
 
 		hpAtualInimigo.setText(Integer.toString(i.getHp()));
 		hpAtualPerso.setText(Integer.toString(p.getHp()));
 		hpMaxInimigo.setText(" / " + Integer.toString(i.getHpMax()));
 		hpMaxPerso.setText(" / " + Integer.toString(p.getHpMax()));
-		
+
 		mpAtualInimigo.setText(Integer.toString(i.getMp()));
 		mpAtualPerso.setText(Integer.toString(p.getMp()));
 		mpMaxInimigo.setText(" / " + Integer.toString(i.getMpMax()));
 		mpMaxPerso.setText(" / " + Integer.toString(p.getMpMax()));
 
+		strI.setText("Strength: " + i.getStrength());
+		dexI.setText("Dextrity: " + i.getDexterity());
+		intI.setText("Intelect: " + i.getIntellect());
+		chaI.setText("Charisma: " + i.getCharisma());
+
+		strP.setText("Strength: " + p.getStrength());
+		dexP.setText("Dextrity: " + p.getDexterity());
+		intP.setText("Intelect: " + p.getIntellect());
+		chaP.setText("Charisma: " + p.getCharisma());
+
 		inimigo.add(nomeInimigo, 5, 5);
-		inimigo.add(hpI, 5, 25);
-		inimigo.add(hpAtualInimigo, 30, 25);
-		inimigo.add(hpMaxInimigo, 50, 25);
-		inimigo.add(mpI, 5, 45);
-		inimigo.add(mpAtualInimigo, 30, 45);
-		inimigo.add(mpMaxInimigo, 50, 45);
+		inimigo.add(raceI, 5, 25);
+		inimigo.add(classI, 60, 25);
+		inimigo.add(statusI, 200, 25);
+		inimigo.add(hpI, 5, 65);
+		inimigo.add(hpAtualInimigo, 30, 65);
+		inimigo.add(hpMaxInimigo, 50, 65);
+		inimigo.add(mpI, 5, 85);
+		inimigo.add(mpAtualInimigo, 30, 85);
+		inimigo.add(mpMaxInimigo, 50, 85);
+		inimigo.add(strI, 5, 125);
+		inimigo.add(dexI, 5, 145);
+		inimigo.add(intI, 5, 165);
+		inimigo.add(chaI, 5, 185);
 
 		perso.add(nomePerso, 5, 5);
-		perso.add(hpP, 5, 25);
-		perso.add(hpAtualPerso, 30, 25);
-		perso.add(hpMaxPerso, 50, 25);
-		perso.add(mpP, 5, 45);
-		perso.add(mpAtualPerso, 30, 45);
-		perso.add(mpMaxPerso, 50, 45);
-		
-		//perso.add(setClassImage(), 150, 150);
-		setClassImage();
-		
+		perso.add(raceP, 5, 25);
+		perso.add(classP, 60, 25);
+		perso.add(statusP, 200, 25);
+		perso.add(hpP, 5, 65);
+		perso.add(hpAtualPerso, 30, 65);
+		perso.add(hpMaxPerso, 50, 65);
+		perso.add(mpP, 5, 85);
+		perso.add(mpAtualPerso, 30, 85);
+		perso.add(mpMaxPerso, 50, 85);
+		perso.add(strP, 5, 125);
+		perso.add(dexP, 5, 145);
+		perso.add(intP, 5, 165);
+		perso.add(chaP, 5, 185);
+
+		perso.add(setClassImage(), 170, 100);
+
 		battleInfo.add(inimigo);
 		battleInfo.add(perso);
 
@@ -247,26 +288,21 @@ public class BatalhaPanel extends AbsolutePanel {
 
 	}
 
-	private void setClassImage() {
-		
-		//Last_Hope.p.setProfession("Warrior");
-		//Last_Hope.p.setRace("Human");
-		
-		System.out.println(Last_Hope.p.getProfession());
-		System.out.println(Last_Hope.p.getRace());
-//		Image i = new Image();
-//
-//		if (Last_Hope.p.getProfession().equals("Warrior")) {
-//			i = new Image(r.warrior());
-//		} else if (Last_Hope.p.getProfession().equals("Archer")) {
-//			i = new Image(r.archer());
-//		} else if (Last_Hope.p.getProfession().equals("Mage")) {
-//			i = new Image(r.mage());
-//		} else if (Last_Hope.p.getProfession().equals("Rogue")) {
-//			i = new Image(r.rogue());
-//		}
-//
-//		return i;
+	private Image setClassImage() {
+
+		Image i = new Image();
+
+		if (Last_Hope.p.getProfession().equals("Warrior")) {
+			i = new Image(r.warrior());
+		} else if (Last_Hope.p.getProfession().equals("Archer")) {
+			i = new Image(r.archer());
+		} else if (Last_Hope.p.getProfession().equals("Mage")) {
+			i = new Image(r.mage());
+		} else if (Last_Hope.p.getProfession().equals("Rogue")) {
+			i = new Image(r.rogue());
+		}
+
+		return i;
 	}
 
 }

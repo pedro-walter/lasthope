@@ -37,6 +37,7 @@ public class Creature {
     private Boot boot;
     private Shield shield;
 	private int resist=0;
+	private String status="";
     //private List bolsa;
   //  private List feats; //ainda nao
  //   private List spells; //ainda nao
@@ -259,6 +260,14 @@ public class Creature {
 
 	public void setShield(Shield shield) {
 		this.shield = shield;
+	}
+	
+	public void setStatus(String status){
+		this.status=status;
+	}
+	
+	public String getStatus(){
+		return this.status;
 	}
 
 }
