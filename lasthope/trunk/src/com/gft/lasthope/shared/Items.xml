@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Items>
+	<Item>
+		<id>1</id>
+		<name>Dagger</name>
+	</Item>
+	<Item>
+		<id>2</id>
+		<name>Sword</name>
+	</Item>
+	<Item>
+		<id>3</id>
+		<name>Shield</name>
+	</Item>
+	<Item>
+		<id>4</id>
+		<name>Helmet</name>
+	</Item>
+	<Item>
+		<id>5</id>
+		<name>Potion</name>
+	</Item>
+</Items>

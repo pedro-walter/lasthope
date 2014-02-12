@@ -15,11 +15,11 @@ import java.util.Map;
  */
 public class Item {
 
-    public Map listWeapons = new HashMap<>();
-    public Map listArmors = new HashMap<>();
-    public Map listShields = new HashMap<>();
-    public Map listHelmets = new HashMap<>();
-    public Map listBoots = new HashMap<>();
+	public HashMap<Integer, Weapon> listWeapons = new HashMap<Integer, Weapon>();
+    public HashMap<Integer, Armor> listArmors = new HashMap<Integer, Armor>();
+    public HashMap<Integer, Shield> listShields = new HashMap<Integer, Shield>();
+    public HashMap<Integer, Helmet> listHelmets = new HashMap<Integer, Helmet>();
+    public HashMap<Integer, Boot> listBoots = new HashMap<Integer, Boot>();
     private int id;
     private String nome;
     private double price;

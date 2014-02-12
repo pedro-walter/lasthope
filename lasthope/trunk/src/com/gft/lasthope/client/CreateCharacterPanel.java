@@ -99,33 +99,26 @@ public class CreateCharacterPanel extends AbsolutePanel {
 
 	private void changeClass(String race, String classe) {
 		b.clear();
-		switch (classe) {
-		case "Warrior":
+		if (classe.equals("Warrior")){
 			c.criaPersonagem("Human", "Warrior");
 			b.add(wImage, 110, 40);
-			break;
-
-		case "Mage":
+		}
+		else if (classe.equals("Mage")){
 			c.criaPersonagem("Human", "Mage");
 			b.add(mImage, 110, 40);
-			break;
-
-		case "Archer":
+		}
+		else if (classe.equals("Archer")){
 			c.criaPersonagem("Human", "Archer");
 			b.add(aImage, 110, 40);
-			break;
-
-		case "Rogue":
+		}
+		else if (classe.equals("Rogue")){
 			c.criaPersonagem("Human", "Rogue");
 			b.add(rImage, 110, 40);
-			break;
-
-		default:
+		}
+		else {
 			b.clear();
 			stats.clear();
 			b.add(tituloB);
-			break;
-
 		}
 
 		// criar metodo para popular o stats e a imagem

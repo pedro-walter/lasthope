@@ -55,46 +55,42 @@ public class Character extends Creature {
     public String escolheClasse(String classe) {
         //default
     	//String classe="Warrior";
-        switch (classe) {
-            case "Warrior":
+        if (classe.equals("Warrior")){
                 atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, this.getSpeed() - 0.1);
-                break;
-            case "Archer":
+        }
+        else if (classe.equals("Archer")){
                 atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 4, this.getIntellect() + 1, this.getCharisma() + 2, this.getHpMax() + 20, this.getMpMax() + 15, this.getSpeed() - 0.2);
-                break;
-            case "Mage":
+        }
+        else if (classe.equals("Mage")){
                 atualizaPersonagem(this.getStrength() + 1, this.getDexterity() + 1, this.getIntellect() + 4, this.getCharisma() + 2, this.getHpMax() + 10, this.getMpMax() + 30, this.getSpeed());
-                break;
-            case "Rogue":
+        }
+        else if (classe.equals("Rogue")){
                 atualizaPersonagem(this.getStrength() + 2, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 15, this.getMpMax() + 15, this.getSpeed() - 0.25);
-                break;
-            default:
+        }
+        else{
                 classe = "Warrior";
                 atualizaPersonagem(this.getStrength() + 4, this.getDexterity() + 2, this.getIntellect() + 1, this.getCharisma() + 1, this.getHpMax() + 30, this.getMpMax() + 10, this.getSpeed() - 0.1);
-                break;
         }
         return classe;
     }
 
     public String escolheRaca(Character p, String race) {
         //String raca="Human";
-        switch (race) {
-            case "Human":
+        if (race.equals("Human")){
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
-                break;
-            case "Elf":
+        }
+        else if (race.equals("Elf")){
                 atualizaPersonagem(0, 2, 1, 0, 10, 5, 0.95);
-                break;
-            case "Dwarf":
+        }
+        else if (race.equals("Dwarf")){
                 atualizaPersonagem(2, 0, 0, 0, 15, 5, 1);
-                break;
-            case "Halfling":
+        }
+        else if (race.equals("Halfling")){
                 atualizaPersonagem(0, 2, 0, 0, 5, 5, 0.9);
-                break;
-            default:
+        }
+        else{
                 race = "Human";
                 atualizaPersonagem(1, 1, 1, 1, 10, 5, 1);
-                break;
         }
         return race;
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message>
+  <header>
+    <to displayName="Richard" address="rick@school.edu" />
+    <from displayName="Joyce" address="joyce@website.com" />
+    <sent>2007-05-12T12:03:55Z</sent>
+    <subject>Re: Flight info</subject>
+  </header>
+  <body>I'll pick you up at the airport at 8:30.  See you then!</body>
+</message>

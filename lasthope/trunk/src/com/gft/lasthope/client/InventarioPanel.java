@@ -15,6 +15,8 @@ public class InventarioPanel extends AbsolutePanel {
 	Label lblNomeItem = new Label();
 	ListBox listaInventario = new ListBox();
 
+	//ItemsDao itemsDao = new ItemsDao();
+	
 	public InventarioPanel(){
 		this.add(new HTML("Inventory"));
 
@@ -80,7 +82,6 @@ public class InventarioPanel extends AbsolutePanel {
 			}
 		});
 
-		// Finalmente, adiciona o painel do Inventário no MidPanel
 
 	}
 }
