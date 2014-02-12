@@ -11,8 +11,8 @@ public interface Resources extends ClientBundle {
 	@Source("/images/mage.png")
 	ImageResource mage();
 	
-	@Source("/images/ranger.png")
-	ImageResource ranger();
+	@Source("/images/archer.png")
+	ImageResource archer();
 	
 	@Source("/images/rogue.png")
 	ImageResource rogue();

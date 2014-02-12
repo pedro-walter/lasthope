@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gft.lasthope.client.LoginInfo;
 import com.gft.lasthope.client.LoginService;
 import com.gft.lasthope.client.LoginServiceAsync;
+import com.gft.lasthope.shared.Character;
 
 public class Last_Hope implements EntryPoint {
 	private LoginInfo loginInfo = null;
@@ -30,6 +31,8 @@ public class Last_Hope implements EntryPoint {
 	AbsolutePanel rootPanel = new AbsolutePanel();
 	Button logout = new Button();
 
+	static Character p;
+	
 	public void onModuleLoad() {
 		// Check login status using login service.
 		LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -99,6 +102,8 @@ public class Last_Hope implements EntryPoint {
 		// rootPanel.setStyleName("dockpanel");
 
 		RootLayoutPanel.get().add(rootPanel);
+		
+		characterCreator();
 
 		//debug
 		//System.out.println("Load ok");
@@ -119,6 +124,19 @@ public class Last_Hope implements EntryPoint {
 		loginPanel.add(signInLink);
 		RootLayoutPanel.get().add(loginPanel);
 
+	}
+	
+	private void characterCreator(){
+		Menus.desabilitaMenu();
+		midPanel.add(new CreateCharacterPanel());
+	}
+	
+	public static void setCharacter(Character c){
+		p = c;
+	}
+	
+	public static Character getCharacter(){
+		return p;
 	}
 
 }

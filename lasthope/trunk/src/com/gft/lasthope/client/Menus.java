@@ -1,6 +1,5 @@
 package com.gft.lasthope.client;
 
-import com.gft.lasthope.shared.Dices;
 import com.gft.lasthope.shared.Enemy;
 import com.gft.lasthope.shared.Character;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,7 +16,7 @@ public class Menus {
 	static Button inventario = new Button();
 	
 	
-	Character p = new Character();
+	//Character p = new Character();
 	Enemy i = new Enemy();
 
 	public VerticalPanel criaMenuWest() {
@@ -65,7 +64,7 @@ public class Menus {
 		teste.setText("Teste");
 		teste.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//testeMid();
+				testeMid();
 				//desabilitaMenu();
 				//Dices.rollDice(4,1);
 			}
@@ -110,21 +109,19 @@ public class Menus {
 	
 	private void testeMid(){
 		Last_Hope.midPanel.clear();
-		
-		
-		//Last_Hope.midPanel.add(new CreateCharacterPanel());
+		Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
 	
 	
-	void desabilitaMenu(){
+	public static void desabilitaMenu(){
 		batalha.setEnabled(false);
 		loja.setEnabled(false);
 		quest.setEnabled(false);
 		inventario.setEnabled(false);
 	}
 	
-	static void habilitaMenu(){
+	public static void habilitaMenu(){
 		batalha.setEnabled(true);
 		loja.setEnabled(true);
 		quest.setEnabled(true);
