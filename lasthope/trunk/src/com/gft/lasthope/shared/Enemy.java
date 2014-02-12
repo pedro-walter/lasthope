@@ -2,24 +2,24 @@ package com.gft.lasthope.shared;
 
 public class Enemy extends Creature {
 
-	public Enemy criaInimigo(int idInimigo){
+	public Enemy criaInimigo(String raca, String classe, int level, int exp, int gold){
 		Enemy inimigo = new Enemy();
-		switch(idInimigo){
-		//Nome, Forc, Dex, Int, Char, Hp, Mp, Xp, Lvl, Res, Spd
-		case 1: atualizaInimigo("Goblin", 1, 1, 1, 1, 10, 5, 10, 1, 0, 1);
-			break;
-		case 2:atualizaInimigo("Kobold", 1, 2, 1, 1, 15, 5, 15, 1, 0, 1);
-			break;
-		case 3:atualizaInimigo("Orc", 3, 1, 1, 1, 20, 5, 23, 1, 1, 1);
-			break;
-		default:atualizaInimigo("Goblin", 1, 1, 1, 1, 10, 5, 10, 1, 0, 1);
-			break;
-		}
+		escolheRaca(raca);
 		return inimigo;
 	}
 
-	public void atualizaInimigo(String nome, int forca, int dextreza, int inteligencia, int carisma, int hp, int mp, int exp, int level, int resistencia, double velocidade){
-		setName(nome);
+	public void escolheRaca(String race) {
+		if (race.equals("Goblin Rogue")) {
+			atualizaInimigo(0, 2, 0, 0, Dices.rollDice(4, 1)+4, 2, 0, 0.95, 1, 7, Dices.rollDice(8, 2));
+		} else if (race.equals("Goblin Shaman")) {
+			atualizaInimigo(1, 1, 1, 1, Dices.rollDice(4, 2)+8, 5, 1, 1, 2, 13, Dices.rollDice(6, 4));
+		} else {
+			race = "Goblin Soldier";
+			atualizaInimigo(1, 1, 0, 0, Dices.rollDice(10, 1)+6, 3, 0, 1, 1, 5, Dices.rollDice(6, 2));
+		}
+	}
+
+	public void atualizaInimigo(int forca, int dextreza, int inteligencia, int carisma, int hp, int mp, int resistencia, double velocidade, int level, int exp, int gold){
 		setStrength(forca);
 		setDexterity(dextreza);
 		setIntellect(inteligencia);
@@ -28,10 +28,11 @@ public class Enemy extends Creature {
 		setHpMax(hp);
 		setMp(mp);
 		setMpMax(mp);
-		setExp(exp);
-		setLevel(level);
 		setResist(resistencia);
 		setSpeed(velocidade);
+		setLevel(level);
+		setExp(exp);
+		setGold(gold);
 	}
 
 /*	private String nome;
