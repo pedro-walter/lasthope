@@ -90,7 +90,7 @@ public class Menus {
 
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.setStyleName("battle");
-		Last_Hope.midPanel.add(new BatalhaPanel());
+		Last_Hope.midPanel.add(new BattlePanel());
 		
 	}
 
@@ -108,8 +108,10 @@ public class Menus {
 	}
 	
 	private void testeMid(){
-		Last_Hope.midPanel.clear();
-		Last_Hope.midPanel.add(new CreateCharacterPanel());
+		
+		BattlePanel.changePic();
+		//Last_Hope.midPanel.clear();
+		//Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
 	

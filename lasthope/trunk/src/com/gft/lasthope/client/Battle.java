@@ -31,7 +31,7 @@ public class Battle {
 				crit=true;
 			}
 			dano = dano - d.getResist();
-			BatalhaPanel.atualizaBattleInfo(dano, d, crit);
+			BattlePanel.atualizaBattleInfo(dano, d, crit);
 
 			d.setHp(d.getHp() - dano);
 
@@ -42,15 +42,15 @@ public class Battle {
 				dano = a.getWeapon().calculaDano(a.getDexterity(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
 			}
 			dano = dano - d.getResist();
-			BatalhaPanel.atualizaBattleInfo(dano, d, crit);
+			BattlePanel.atualizaBattleInfo(dano, d, crit);
 
 			d.setHp(d.getHp() - dano);
 
 		} else {
 			if (a instanceof Character) {
-				BatalhaPanel.setLog("You miss!");
+				BattlePanel.setLog("You miss!");
 			} else {
-				BatalhaPanel.setLog("The enemy missed!");
+				BattlePanel.setLog("The enemy missed!");
 			}
 		}
 
@@ -93,13 +93,13 @@ public class Battle {
 
 		if (isWinner(p, i) instanceof Character) {
 			p.ganharBatalha(p, i.getExp(), i.getGold());
-			BatalhaPanel.setLog("You get " + Long.toString(i.getExp())
+			BattlePanel.setLog("You get " + Long.toString(i.getExp())
 					+ " EXP and " + Integer.toString(i.getGold()) + " gold pieces");
-			BatalhaPanel.atacar.setEnabled(false);
+			BattlePanel.atacar.setEnabled(false);
 		} else if (isWinner(p, i) instanceof Enemy) {
 			p.morrer();
-			BatalhaPanel.setLog("You died.");
-			BatalhaPanel.atacar.setEnabled(false);
+			BattlePanel.setLog("You died.");
+			BattlePanel.atacar.setEnabled(false);
 		}
 
 	}

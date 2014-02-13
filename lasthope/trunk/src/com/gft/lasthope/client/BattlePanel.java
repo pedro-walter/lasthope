@@ -9,6 +9,7 @@ import com.gft.lasthope.shared.Character;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -17,13 +18,13 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 
-public class BatalhaPanel extends AbsolutePanel {
+public class BattlePanel extends AbsolutePanel {
 
-	Resources r = GWT.create(Resources.class);
+	static Resources r = GWT.create(Resources.class);
 	AbsolutePanel actions = new AbsolutePanel();
 	AbsolutePanel battleInfo = new AbsolutePanel();
 	AbsolutePanel inimigo = new AbsolutePanel();
-	AbsolutePanel perso = new AbsolutePanel();
+	static AbsolutePanel perso = new AbsolutePanel();
 	final static TextArea logBattle = new TextArea();
 	final Label nomeInimigo = new Label();
 	Label nomePerso = new Label();
@@ -57,15 +58,14 @@ public class BatalhaPanel extends AbsolutePanel {
 	static Button atacar = new Button();
 	Button btnLimpaLog = new Button();
 	Button defender = new Button();
-	int hpInimigo = 20;
-	int hpPerso = 20;
+	static Image charPic = new Image();
 
 	static Character p = Last_Hope.getCharacter();
 	static Enemy i = new Enemy();
 	Item it = new Item();
 	Weapon w;
 
-	public BatalhaPanel() {
+	public BattlePanel() {
 
 		it.updateWeapons();
 
@@ -89,6 +89,8 @@ public class BatalhaPanel extends AbsolutePanel {
 	}
 
 	private void battleAttack() {
+		
+		changePic();
 
 		Battle.aBatalhaQueVaiGirando(p, i);
 
@@ -206,6 +208,8 @@ public class BatalhaPanel extends AbsolutePanel {
 
 		statusI.setText("Status: " + i.getStatus());
 		statusP.setText("Status: " + p.getStatus());
+		
+		charPic = setClassImage();
 
 		hpAtualInimigo.setText(Integer.toString(i.getHp()));
 		hpAtualPerso.setText(Integer.toString(p.getHp()));
@@ -257,7 +261,7 @@ public class BatalhaPanel extends AbsolutePanel {
 		perso.add(intP, 5, 165);
 		perso.add(chaP, 5, 185);
 
-		perso.add(setClassImage(), 170, 100);
+		perso.add(charPic, 170, 100);
 
 		battleInfo.add(inimigo);
 		battleInfo.add(perso);
@@ -303,6 +307,31 @@ public class BatalhaPanel extends AbsolutePanel {
 		}
 
 		return i;
+	}
+	
+	public static void changePic(){
+		Image mage = new Image(r.mage());
+		final Image war = new Image(r.warrior());
+		
+		charPic.removeFromParent();
+		charPic = mage;
+		perso.add(charPic, 170, 100);
+		
+		//Window.alert("Teste 27346178246");
+		Timer t = new Timer(){
+
+			@Override
+			public void run() {
+				charPic.removeFromParent();
+				charPic = war;
+				perso.add(charPic, 170, 100);
+				//Window.alert("Teste");
+				
+			}
+			
+		};
+		t.schedule(5000);
+
 	}
 
 }

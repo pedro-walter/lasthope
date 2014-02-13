@@ -39,9 +39,8 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	Label name = new Label();
 	Label classL = new Label();
 	Label raceL = new Label();
-	
+
 	Button create = new Button();
-	
 
 	TextBox nameT = new TextBox();
 
@@ -62,7 +61,7 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		nameT.setStyleName("textInsideChar");
 		classL.setStyleName("textInsideChar");
 		raceL.setStyleName("textInsideChar");
-		//create.setStyleName("textInsideChar");
+		// create.setStyleName("textInsideChar");
 
 		name.setText("Name");
 		nameT.setSize("150px", "20px");
@@ -85,35 +84,36 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		listClass.addItem("Mage");
 		listClass.addItem("Archer");
 		listClass.addItem("Rogue");
-		
+
 		listRace.addItem("---");
 		listRace.addItem("Human");
 		listRace.addItem("Dwarf");
-		listRace.addItem("Orc");
+		listRace.addItem("Half-Orc");
 		listRace.addItem("Elf");
 
 		b.add(stats);
 
 		listClass.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				changeClass("Human",
+				changeClass(listRace.getItemText(listRace.getSelectedIndex()),
 						listClass.getItemText(listClass.getSelectedIndex()));
 
 			}
 
 		});
-		
+
 		listRace.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				Window.alert("Trocou");
+				changeClass(listRace.getItemText(listRace.getSelectedIndex()),
+						listClass.getItemText(listClass.getSelectedIndex()));
 			}
 
 		});
-		
+
 		create.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				create();
-				
+
 			}
 
 		});
@@ -123,11 +123,11 @@ public class CreateCharacterPanel extends AbsolutePanel {
 
 		a.add(classL, 10, 130);
 		a.add(listClass, 50, 130);
-		
-		a.add(raceL,10,160);
-		a.add(listRace,50,160);
-		
-		a.add(create,290,315);
+
+		a.add(raceL, 10, 160);
+		a.add(listRace, 50, 160);
+
+		a.add(create, 290, 315);
 
 		Last_Hope.midPanel.add(a, 10, 10);
 		Last_Hope.midPanel.add(b, 370, 10);
@@ -136,19 +136,20 @@ public class CreateCharacterPanel extends AbsolutePanel {
 
 	private void changeClass(String race, String classe) {
 		b.clear();
-		if (classe.equals("Warrior")){
-			populateStats("Human", "Warrior", wImage);
+
+		if (race.equals("---")) {
+			race = "Human";
 		}
-		else if (classe.equals("Mage")){
-			populateStats("Human", "Mage", mImage);
-		}
-		else if (classe.equals("Archer")){
-			populateStats("Human", "Archer", aImage);
-		}
-		else if (classe.equals("Rogue")){
-			populateStats("Human", "Rogue", rImage);
-		}
-		else {
+
+		if (classe.equals("Warrior")) {
+			populateStats(race, classe, wImage);
+		} else if (classe.equals("Mage")) {
+			populateStats(race, classe, mImage);
+		} else if (classe.equals("Archer")) {
+			populateStats(race, classe, aImage);
+		} else if (classe.equals("Rogue")) {
+			populateStats(race, classe, rImage);
+		} else {
 			populateStatsEmpty();
 		}
 
@@ -158,31 +159,30 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	}
 
 	private void populateStats(String race, String classe, Image i) {
-		
-		c = new Character(race,classe);
-		
+
+		c = new Character(race, classe);
+
 		System.out.println(race);
 		System.out.println(classe);
-		
+
 		b.add(tituloB);
-		//c.criaPersonagem(race, classe);
+		// c.criaPersonagem(race, classe);
 		b.add(i, 110, 40);
-		
+
 		strL.setText("Strength: " + c.getStrength());
 		dexL.setText("Dextrity: " + c.getDexterity());
 		intL.setText("Intelect: " + c.getIntellect());
 		chaL.setText("Charisma: " + c.getCharisma());
-		hpL.setText("HP: "+c.getHpMax());
-		mpL.setText("MP: "+c.getMpMax());
-		
+		hpL.setText("HP: " + c.getHpMax());
+		mpL.setText("MP: " + c.getMpMax());
+
 		stats.add(strL, 10, 200);
 		stats.add(dexL, 10, 220);
 		stats.add(intL, 10, 240);
 		stats.add(chaL, 10, 260);
 		stats.add(hpL, 10, 280);
 		stats.add(mpL, 10, 300);
-		
-		
+
 	}
 
 	private void populateStatsEmpty() {
@@ -190,12 +190,21 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		stats.clear();
 		b.add(tituloB);
 	}
-	
-	private void create(){
-		c.setName(nameT.getText());
-		Last_Hope.setCharacter(c);
-		Last_Hope.midPanel.clear();
-		Menus.habilitaMenu();
+
+	private void create() {
+		
+		if(nameT.getText().equals("")){
+			Window.alert("Enter a name");
+		}else if(listClass.getItemText(listClass.getSelectedIndex()).equals("---")){
+			Window.alert("Select a Class");
+		}else if(listClass.getItemText(listRace.getSelectedIndex()).equals("---")){
+			Window.alert("Select a Race");
+		}else{
+			c.setName(nameT.getText());
+			Last_Hope.setCharacter(c);
+			Last_Hope.midPanel.clear();
+			Menus.habilitaMenu();
+		}
 		
 	}
 
