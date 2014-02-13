@@ -28,70 +28,11 @@ public class Weapon extends Item{
         this.setTipo(tipo);
     }
 
-//    public int calculaDano(int dadoArma, int attPersonagem) {
-//        int dano;
-//        switch (dadoArma) {
-//            case 1:
-//                dano = calculaDano(attPersonagem, 4, 1);
-//                break;
-//            case 2:
-//                dano = calculaDano(attPersonagem, 6, 1);
-//                break;
-//            case 3:
-//                dano = calculaDano(attPersonagem, 8, 1);
-//                break;
-//            case 4:
-//                dano = calculaDano(attPersonagem, 10, 1);
-//                break;
-//            default:
-//                dano = 1;
-//        }
-//        return dano;
-//    }
-
     public int calculaDano(int attPersonagem, int face, int qtd) {
         int dano;
         dano = Dices.rollDice(face, qtd) + attPersonagem;
         return dano;
     }
-
-//    public int calculaDano1d6(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD6(1) + attPersonagem;
-//        return dano;
-//    }
-//
-//    public int calculaDano1d8(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD8(1) + attPersonagem;
-//        return dano;
-//    }
-//
-//    public int calculaDano1d10(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD10(1) + attPersonagem;
-//        return dano;
-//    }
-//
-//    public int calculaDano1d12(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD12(1) + attPersonagem;
-//        return dano;
-//    }
-//
-//    public int calculaDano2d6(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD6(2) + attPersonagem;
-//        return dano;
-//    }
-//
-//    public int calculaDano2d4(int attPersonagem) {
-//        int dano;
-//        dano = Dices.rolarD4(2) + attPersonagem;
-//        return dano;
-//    }
-
-
 
     /**
      * @return the criticalRate

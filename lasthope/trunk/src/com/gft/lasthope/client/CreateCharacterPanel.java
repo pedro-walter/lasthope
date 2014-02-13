@@ -161,6 +161,7 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	private void populateStats(String race, String classe, Image i) {
 
 		c = new Character(race, classe);
+		c.setModificators(c);
 
 		System.out.println(race);
 		System.out.println(classe);
@@ -173,8 +174,10 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		dexL.setText("Dextrity: " + c.getDexterity());
 		intL.setText("Intelect: " + c.getIntellect());
 		chaL.setText("Charisma: " + c.getCharisma());
+
 		hpL.setText("HP: " + c.getHpMax());
 		mpL.setText("MP: " + c.getMpMax());
+
 
 		stats.add(strL, 10, 200);
 		stats.add(dexL, 10, 220);
@@ -191,8 +194,9 @@ public class CreateCharacterPanel extends AbsolutePanel {
 		b.add(tituloB);
 	}
 
+
 	private void create() {
-		
+
 		if(nameT.getText().equals("")){
 			Window.alert("Enter a name");
 		}else if(listClass.getItemText(listClass.getSelectedIndex()).equals("---")){
@@ -205,7 +209,7 @@ public class CreateCharacterPanel extends AbsolutePanel {
 			Last_Hope.midPanel.clear();
 			Menus.habilitaMenu();
 		}
-		
+
 	}
 
 }

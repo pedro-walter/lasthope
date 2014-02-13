@@ -2,7 +2,7 @@ package com.gft.lasthope.shared;
 
 public class Enemy extends Creature {
 
-	public Enemy criaInimigo(String raca, String classe, int level, int exp, int gold){
+	public Enemy criaInimigo(String raca){
 		Enemy inimigo = new Enemy();
 		escolheRaca(raca);
 		return inimigo;

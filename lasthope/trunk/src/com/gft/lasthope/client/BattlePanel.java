@@ -24,7 +24,7 @@ public class BattlePanel extends AbsolutePanel {
 	AbsolutePanel actions = new AbsolutePanel();
 	AbsolutePanel battleInfo = new AbsolutePanel();
 	AbsolutePanel inimigo = new AbsolutePanel();
-	static AbsolutePanel perso = new AbsolutePanel();
+	AbsolutePanel perso = new AbsolutePanel();
 	final static TextArea logBattle = new TextArea();
 	final Label nomeInimigo = new Label();
 	Label nomePerso = new Label();
@@ -62,11 +62,13 @@ public class BattlePanel extends AbsolutePanel {
 
 	static Character p = Last_Hope.getCharacter();
 	static Enemy i = new Enemy();
+
 	Item it = new Item();
 	Weapon w;
 
 	public BattlePanel() {
-
+		i.setModificators(i);
+		atacar.setEnabled(true);
 		it.updateWeapons();
 
 		// p.setName("Character");
@@ -89,8 +91,8 @@ public class BattlePanel extends AbsolutePanel {
 	}
 
 	private void battleAttack() {
-		
-		changePic();
+
+		//changePic();
 
 		Battle.aBatalhaQueVaiGirando(p, i);
 
@@ -124,7 +126,7 @@ public class BattlePanel extends AbsolutePanel {
 			if (crit) {
 				log = "Critical strike! You dealt " + Integer.toString(d)
 						+ " damage!";
-				
+
 			} else {
 				log = "You dealt " + Integer.toString(d) + " damage!";
 			}
@@ -208,7 +210,7 @@ public class BattlePanel extends AbsolutePanel {
 
 		statusI.setText("Status: " + i.getStatus());
 		statusP.setText("Status: " + p.getStatus());
-		
+
 		charPic = setClassImage();
 
 		hpAtualInimigo.setText(Integer.toString(i.getHp()));
@@ -308,30 +310,31 @@ public class BattlePanel extends AbsolutePanel {
 
 		return i;
 	}
-	
-	public static void changePic(){
-		Image mage = new Image(r.mage());
-		final Image war = new Image(r.warrior());
-		
-		charPic.removeFromParent();
-		charPic = mage;
-		perso.add(charPic, 170, 100);
-		
-		//Window.alert("Teste 27346178246");
-		Timer t = new Timer(){
 
-			@Override
-			public void run() {
-				charPic.removeFromParent();
-				charPic = war;
-				perso.add(charPic, 170, 100);
-				//Window.alert("Teste");
-				
-			}
-			
-		};
-		t.schedule(5000);
+//	public static void changePic(){
+//		Image mage = new Image(r.mage());
+//		final Image war = new Image(r.warrior());
+//
+//		charPic.removeFromParent();
+//		charPic = mage;
+//		perso.add(charPic, 170, 100);
+//
+//		//Window.alert("Teste 27346178246");
+//		Timer t = new Timer(){
+//
+//			@Override
+//			public void run() {
+//				charPic.removeFromParent();
+//				charPic = war;
+//				perso.add(charPic, 170, 100);
+//				//Window.alert("Teste");
+//
+//			}
+//
+//		};
+//		t.schedule(5000);
+//
+//	}
 
-	}
 
 }

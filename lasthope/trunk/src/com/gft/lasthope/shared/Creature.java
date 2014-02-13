@@ -16,10 +16,16 @@ public class Creature {
     private String name;
     private String race;
     private String profession;
-    private int strength=4;
-    private int dexterity=1;
-    private int intellect=1; //ainda nao
-    private int charisma=1; //ainda nao
+    private int strength=10;
+    private int dexterity=10;
+    private int intellect=10;
+    private int charisma=10;
+    private int constitution=10;
+    private int modStr;
+    private int modDex;
+	private int modInt;
+    private int modCar;
+    private int modCon;
     private double speed=1;
     private int hp=10;
     private int mp=10;
@@ -261,13 +267,70 @@ public class Creature {
 	public void setShield(Shield shield) {
 		this.shield = shield;
 	}
-	
+
 	public void setStatus(String status){
 		this.status=status;
 	}
-	
+
 	public String getStatus(){
 		return this.status;
 	}
+
+	public int getConstitution() {
+		return constitution;
+	}
+
+	public void setConstitution(int constitution) {
+		this.constitution = constitution;
+	}
+
+	public int getModStr() {
+		return modStr;
+	}
+
+	public void setModStr(int modStr) {
+		this.modStr = modStr;
+	}
+
+	public int getModDex() {
+		return modDex;
+	}
+
+	public void setModDex(int modDex) {
+		this.modDex = modDex;
+	}
+
+	public int getModInt() {
+		return modInt;
+	}
+
+	public void setModInt(int modInt) {
+		this.modInt = modInt;
+	}
+
+	public int getModCar() {
+		return modCar;
+	}
+
+	public void setModCar(int modCar) {
+		this.modCar = modCar;
+	}
+
+	public int getModCon() {
+		return modCon;
+	}
+
+	public void setModCon(int modCon) {
+		this.modCon = modCon;
+	}
+
+	public void setModificators(Creature creature){
+		creature.setModStr(Math.round(creature.getStrength()-10)/2);
+		creature.setModDex(Math.round(creature.getDexterity()-10)/2);
+		creature.setModCon(Math.round(creature.getConstitution()-10)/2);
+		creature.setModInt(Math.round(creature.getIntellect()-10)/2);
+		creature.setModCar(Math.round(creature.getCharisma()-10)/2);
+	}
+
 
 }

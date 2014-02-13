@@ -14,8 +14,8 @@ public class Menus {
 	static Button quest = new Button();
 	static Button teste = new Button();
 	static Button inventario = new Button();
-	
-	
+
+
 	//Character p = new Character();
 	Enemy i = new Enemy();
 
@@ -31,7 +31,7 @@ public class Menus {
 			}
 
 		});
-		
+
 		inventario.setText("Inventário");
 		inventario.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -39,7 +39,7 @@ public class Menus {
 			}
 
 		});
-		
+
 		//loja
 		loja.setText("Loja");
 		loja.addClickHandler(new ClickHandler() {
@@ -59,7 +59,7 @@ public class Menus {
 			}
 
 		});
-		
+
 		//teste
 		teste.setText("Teste");
 		teste.addClickHandler(new ClickHandler() {
@@ -91,44 +91,44 @@ public class Menus {
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.setStyleName("battle");
 		Last_Hope.midPanel.add(new BattlePanel());
-		
+
 	}
 
 	private void lojaMid() {
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.add(new HTML("lojinha do Abu"));
-		
+
 	}
 
 	private void questMid() {
 		Last_Hope.midPanel.clear();
 		Last_Hope.midPanel.add(new HTML("1 - descer a lenha nos goblin"));
 		Last_Hope.midPanel.add(new HTML("2 - ajudar a veia a atravesar a rua"));
-		
+
 	}
-	
+
 	private void testeMid(){
-		
-		BattlePanel.changePic();
+
+		//BattlePanel.changePic();
 		//Last_Hope.midPanel.clear();
 		//Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
-	
-	
+
+
 	public static void desabilitaMenu(){
 		batalha.setEnabled(false);
 		loja.setEnabled(false);
 		quest.setEnabled(false);
 		inventario.setEnabled(false);
 	}
-	
+
 	public static void habilitaMenu(){
 		batalha.setEnabled(true);
 		loja.setEnabled(true);
 		quest.setEnabled(true);
 		inventario.setEnabled(true);
 	}
-	
-	
+
+
 }

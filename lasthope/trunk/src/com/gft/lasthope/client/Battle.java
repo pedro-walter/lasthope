@@ -24,10 +24,10 @@ public class Battle {
 
 		if (numRolado >= (21 - a.getWeapon().getCriticalRate())) {
 			if ("Physical".equals(a.getWeapon().getTipo())) {
-				dano = (a.getWeapon().calculaDano(a.getStrength(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
+				dano = (a.getWeapon().calculaDano(a.getModStr(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
 				crit=true;
 			} else {
-				dano = (a.getWeapon().calculaDano(a.getDexterity(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
+				dano = (a.getWeapon().calculaDano(a.getModDex(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd()))* a.getWeapon().getCriticalMultiplier();
 				crit=true;
 			}
 			dano = dano - d.getResist();
@@ -37,9 +37,9 @@ public class Battle {
 
 		} else if (numRolado >= d.getDefense()) {
 			if ("Physical".equals(a.getWeapon().getTipo())) {
-				dano = a.getWeapon().calculaDano(a.getStrength(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
+				dano = a.getWeapon().calculaDano(a.getModStr(),a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
 			} else {
-				dano = a.getWeapon().calculaDano(a.getDexterity(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
+				dano = a.getWeapon().calculaDano(a.getModDex(), a.getWeapon().getDadoArma(),a.getWeapon().getQtd());
 			}
 			dano = dano - d.getResist();
 			BattlePanel.atualizaBattleInfo(dano, d, crit);
@@ -96,6 +96,7 @@ public class Battle {
 			BattlePanel.setLog("You get " + Long.toString(i.getExp())
 					+ " EXP and " + Integer.toString(i.getGold()) + " gold pieces");
 			BattlePanel.atacar.setEnabled(false);
+
 		} else if (isWinner(p, i) instanceof Enemy) {
 			p.morrer();
 			BattlePanel.setLog("You died.");
