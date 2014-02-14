@@ -324,12 +324,12 @@ public class Creature {
 		this.modCon = modCon;
 	}
 
-	public void setModificators(Creature creature){
-		creature.setModStr(Math.round(creature.getStrength()-10)/2);
-		creature.setModDex(Math.round(creature.getDexterity()-10)/2);
-		creature.setModCon(Math.round(creature.getConstitution()-10)/2);
-		creature.setModInt(Math.round(creature.getIntellect()-10)/2);
-		creature.setModCar(Math.round(creature.getCharisma()-10)/2);
+	public void setModificators(){
+		this.setModStr(Math.round(this.getStrength()-10)/2);
+		this.setModDex(Math.round(this.getDexterity()-10)/2);
+		this.setModCon(Math.round(this.getConstitution()-10)/2);
+		this.setModInt(Math.round(this.getIntellect()-10)/2);
+		this.setModCar(Math.round(this.getCharisma()-10)/2);
 	}
 
 

@@ -6,8 +6,9 @@ public class Enemy extends Creature {
 
 	public Enemy() {
 
-		atualizaInimigo(1, 1, 1, 1, 10, 5, 10, 1, 1, 10, 50);
+		atualizaInimigo("Goblin", 10, 12, 10, 10, 10, 10, 5, 0, 1, 1, 10, Dices.rollDice(4, 2));
 		this.setControladorTempo(this.getSpeed());
+		this.setModificators();
 
 	}
 
@@ -17,31 +18,34 @@ public class Enemy extends Creature {
 
 		// Nome, Forc, Dex, Int, Char, Hp, Mp, Xp, Lvl, Res, Spd
 		case 1:
-			atualizaInimigo(1, 1, 1, 1, 10, 5, 10, 1, 1, 10, 50);
+			atualizaInimigo("Goblin", 10, 12, 10, 10, 10, 10, 5, 0, 1, 1, 10, Dices.rollDice(4, 2));
 			break;
 		case 2:
-			atualizaInimigo(1, 2, 1, 1, 15, 5, 15, 1, 1, 10, 50);
+			atualizaInimigo("Orc", 14, 10, 10, 10, 10, 15, 5, 0, 1, 1, 20, Dices.rollDice(4, 3));
 			break;
 		case 3:
-			atualizaInimigo(3, 1, 1, 1, 20, 5, 23, 1, 1, 10, 50);
+			atualizaInimigo("Ogro", 16, 12, 10, 10, 10, 20, 5, 1, 1, 1, 35, Dices.rollDice(4, 4));
 			break;
 		default:
-			atualizaInimigo(1, 1, 1, 1, 10, 5, 10, 1, 1, 10, 50);
+			atualizaInimigo("Troll", 20, 14, 10, 10, 10, 10, 5, 1, 1, 1, 50, Dices.rollDice(4, 5));
 			break;
 		}
+		//nome,forca,dextreza,inteligencia,carisma,hp,mp,resistencia,velocidade,level,exp,gold
 
 		this.setControladorTempo(this.getSpeed());
+		this.setModificators();
 		return inimigo;
 
 	}
 
 
-	public void atualizaInimigo(int forca, int dextreza, int inteligencia, int carisma, int hp, int mp, int resistencia, double velocidade, int level, int exp, int gold){
+	public void atualizaInimigo(String nome, int forca, int dextreza, int inteligencia, int carisma, int constituicao, int hp, int mp, int resistencia, double velocidade, int level, int exp, int gold){
 
 		setStrength(forca);
 		setDexterity(dextreza);
 		setIntellect(inteligencia);
 		setCharisma(carisma);
+		setConstitution(constituicao);
 		setHp(hp);
 		setHpMax(hp);
 		setMp(mp);
@@ -52,7 +56,7 @@ public class Enemy extends Creature {
 		setExp(exp);
 		setGold(gold);
 	}
-	
+
 	public void die(){
 		Last_Hope.setEnemy(null);
 	}

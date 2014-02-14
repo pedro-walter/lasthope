@@ -161,7 +161,7 @@ public class CreateCharacterPanel extends AbsolutePanel {
 	private void populateStats(String race, String classe, Image i) {
 
 		c = new Character(race, classe);
-		c.setModificators(c);
+		c.setModificators();
 
 		System.out.println(race);
 		System.out.println(classe);
