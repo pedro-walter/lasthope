@@ -1,7 +1,6 @@
 package com.gft.lasthope.client;
 
 import com.gft.lasthope.shared.Enemy;
-import com.gft.lasthope.shared.Character;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -14,11 +13,9 @@ public class Menus {
 	static Button quest = new Button();
 	static Button teste = new Button();
 	static Button inventario = new Button();
-
-
-	//Character p = new Character();
-	Enemy i = new Enemy();
-
+	
+	BattlePanel bP;
+	
 	public VerticalPanel criaMenuWest() {
 		VerticalPanel auxV = new VerticalPanel();
 
@@ -87,9 +84,9 @@ public class Menus {
 	}
 
 	public void batalhaMid() {
-
+		
 		Last_Hope.midPanel.clear();
-		Last_Hope.midPanel.setStyleName("battle");
+		//Last_Hope.midPanel = new AbsolutePanel();
 		Last_Hope.midPanel.add(new BattlePanel());
 
 	}
@@ -109,9 +106,6 @@ public class Menus {
 
 	private void testeMid(){
 
-		//BattlePanel.changePic();
-		//Last_Hope.midPanel.clear();
-		//Last_Hope.midPanel.add(new CreateCharacterPanel());
 	}
 
 

@@ -15,6 +15,7 @@ import com.gft.lasthope.client.LoginInfo;
 import com.gft.lasthope.client.LoginService;
 import com.gft.lasthope.client.LoginServiceAsync;
 import com.gft.lasthope.shared.Character;
+import com.gft.lasthope.shared.Enemy;
 
 public class Last_Hope implements EntryPoint {
 	private LoginInfo loginInfo = null;
@@ -32,6 +33,7 @@ public class Last_Hope implements EntryPoint {
 	Button logout = new Button();
 
 	static Character p;
+	static Enemy e = new Enemy();
 	
 	public void onModuleLoad() {
 		// Check login status using login service.
@@ -138,5 +140,13 @@ public class Last_Hope implements EntryPoint {
 	public static Character getCharacter(){
 		return p;
 	}
-
+	
+	public static void setEnemy(Enemy i){
+		e = i;
+	}
+	
+	public static Enemy getEnemy(){
+		return e;
+	}
+	
 }

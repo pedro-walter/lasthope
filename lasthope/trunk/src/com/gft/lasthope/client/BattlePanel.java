@@ -1,15 +1,13 @@
 package com.gft.lasthope.client;
 
+import com.gft.lasthope.shared.Enemy;
 import com.gft.lasthope.shared.Resources;
 import com.gft.lasthope.shared.Weapon;
-import com.gft.lasthope.shared.Creature;
-import com.gft.lasthope.shared.Enemy;
 import com.gft.lasthope.shared.Item;
 import com.gft.lasthope.shared.Character;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -54,35 +52,34 @@ public class BattlePanel extends AbsolutePanel {
 	Label hpP = new Label("HP");
 	Label mpI = new Label("MP");
 	Label mpP = new Label("MP");
+	Label battleInfoL = new Label("Battle Info");
 	static Button sair = new BotaoSair();
 	static Button atacar = new Button();
 	Button btnLimpaLog = new Button();
 	Button defender = new Button();
-	static Image charPic = new Image();
-
 	static Character p = Last_Hope.getCharacter();
-	static Enemy i = new Enemy();
+	Enemy e;
+	
 
 	Item it = new Item();
 	Weapon w;
+	Battle b;
 
 	public BattlePanel() {
-		i.setModificators(i);
+		
+		b = new Battle();
+		
+		e = Last_Hope.getEnemy();
+		
+		//e.setModificators(e);
 		atacar.setEnabled(true);
+
 		it.updateWeapons();
-
-		// p.setName("Character");
-		i.setName("Goblin");
-
+		p.setWeapon((Weapon)it.listWeapons.get(2));
+		e.setWeapon((Weapon)it.listWeapons.get(2));
+		
 		p.setHp(300);
-		i.setHp(300);
-
-		// p.setControladorTempo(1);
-		i.setControladorTempo(1);
-
-		p.setWeapon((Weapon) it.listWeapons.get(2));
-		i.setWeapon((Weapon) it.listWeapons.get(2));
-
+	
 		logBattle();
 		actionsPanel();
 		battleInfo();
@@ -92,54 +89,10 @@ public class BattlePanel extends AbsolutePanel {
 
 	private void battleAttack() {
 
-		//changePic();
-
-		Battle.aBatalhaQueVaiGirando(p, i);
+		b.aBatalhaQueVaiGirando(p, e);
 
 	}
 
-	static void atualizaBattleInfo(int d, Creature c, boolean crit) {
-		int in;
-		String log;
-
-		if (c instanceof Character) {
-
-			in = Integer.valueOf(hpAtualPerso.getText()) - d;
-			hpAtualPerso.setText(Integer.toString(in));
-
-			if (crit) {
-				log = "Critical Strike! The enemy dealt " + Integer.toString(d)
-						+ " damage!";
-
-			} else {
-				log = "The enemy dealt " + Integer.toString(d) + " damage!";
-			}
-			setLog(log);
-
-			System.out.println("Chegou ate atualizaBattleInfo e entrou em c");
-
-		} else {
-
-			in = Integer.valueOf(hpAtualInimigo.getText()) - d;
-			hpAtualInimigo.setText(Integer.toString(in));
-
-			if (crit) {
-				log = "Critical strike! You dealt " + Integer.toString(d)
-						+ " damage!";
-
-			} else {
-				log = "You dealt " + Integer.toString(d) + " damage!";
-			}
-
-			System.out.println("Chegou ate atualizaBattleInfo e entrou em i");
-
-			setLog(log);
-
-		}
-
-		statusI.setText("Status: " + i.getStatus());
-		statusP.setText("Status: " + p.getStatus());
-	}
 
 	private void logBattle() {
 
@@ -185,7 +138,7 @@ public class BattlePanel extends AbsolutePanel {
 
 		// informacoes de batalha
 		battleInfo.setStyleName("battleInfo");
-		battleInfo.add(new HTML("Battle Info"));
+		battleInfo.add(battleInfoL);
 		battleInfo.setSize("300px", "490px");
 
 		// dentro das informacoes de batalha, vai as informacoes do inimigo e do
@@ -196,37 +149,35 @@ public class BattlePanel extends AbsolutePanel {
 		inimigo.setSize("293px", "220px");
 		perso.setSize("293px", "220px");
 
-		nomeInimigo.setText(i.getName());
+		nomeInimigo.setText(e.getName());
 		nomePerso.setText(p.getName());
 
-		raceI.setText(i.getRace());
+		raceI.setText(e.getRace());
 		raceP.setText(p.getRace());
 
-		classI.setText(i.getProfession());
+		classI.setText(e.getProfession());
 		classP.setText(p.getProfession());
 
-		i.setStatus("Normal");
+		e.setStatus("Normal");
 		p.setStatus("Normal");
 
-		statusI.setText("Status: " + i.getStatus());
+		statusI.setText("Status: " + e.getStatus());
 		statusP.setText("Status: " + p.getStatus());
-
-		charPic = setClassImage();
-
-		hpAtualInimigo.setText(Integer.toString(i.getHp()));
+		
+		hpAtualInimigo.setText(Integer.toString(e.getHp()));
 		hpAtualPerso.setText(Integer.toString(p.getHp()));
-		hpMaxInimigo.setText(" / " + Integer.toString(i.getHpMax()));
+		hpMaxInimigo.setText(" / " + Integer.toString(e.getHpMax()));
 		hpMaxPerso.setText(" / " + Integer.toString(p.getHpMax()));
 
-		mpAtualInimigo.setText(Integer.toString(i.getMp()));
+		mpAtualInimigo.setText(Integer.toString(e.getMp()));
 		mpAtualPerso.setText(Integer.toString(p.getMp()));
-		mpMaxInimigo.setText(" / " + Integer.toString(i.getMpMax()));
+		mpMaxInimigo.setText(" / " + Integer.toString(e.getMpMax()));
 		mpMaxPerso.setText(" / " + Integer.toString(p.getMpMax()));
 
-		strI.setText("Strength: " + i.getStrength());
-		dexI.setText("Dextrity: " + i.getDexterity());
-		intI.setText("Intelect: " + i.getIntellect());
-		chaI.setText("Charisma: " + i.getCharisma());
+		strI.setText("Strength: " + e.getStrength());
+		dexI.setText("Dextrity: " + e.getDexterity());
+		intI.setText("Intelect: " + e.getIntellect());
+		chaI.setText("Charisma: " + e.getCharisma());
 
 		strP.setText("Strength: " + p.getStrength());
 		dexP.setText("Dextrity: " + p.getDexterity());
@@ -263,7 +214,7 @@ public class BattlePanel extends AbsolutePanel {
 		perso.add(intP, 5, 165);
 		perso.add(chaP, 5, 185);
 
-		perso.add(charPic, 170, 100);
+		perso.add(setClassImage(), 170, 100);
 
 		battleInfo.add(inimigo);
 		battleInfo.add(perso);
@@ -272,6 +223,7 @@ public class BattlePanel extends AbsolutePanel {
 	}
 
 	public static void sairBattle() {
+
 		Last_Hope.midPanel.add(sair, 855, 555);
 
 	}
@@ -310,31 +262,5 @@ public class BattlePanel extends AbsolutePanel {
 
 		return i;
 	}
-
-//	public static void changePic(){
-//		Image mage = new Image(r.mage());
-//		final Image war = new Image(r.warrior());
-//
-//		charPic.removeFromParent();
-//		charPic = mage;
-//		perso.add(charPic, 170, 100);
-//
-//		//Window.alert("Teste 27346178246");
-//		Timer t = new Timer(){
-//
-//			@Override
-//			public void run() {
-//				charPic.removeFromParent();
-//				charPic = war;
-//				perso.add(charPic, 170, 100);
-//				//Window.alert("Teste");
-//
-//			}
-//
-//		};
-//		t.schedule(5000);
-//
-//	}
-
 
 }

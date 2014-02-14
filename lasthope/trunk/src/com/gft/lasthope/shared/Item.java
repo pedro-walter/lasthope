@@ -7,7 +7,6 @@ package com.gft.lasthope.shared;
  */
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
